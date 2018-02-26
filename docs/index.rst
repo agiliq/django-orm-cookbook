@@ -12,6 +12,12 @@ Django ORM Cookbook
    query.rst
    or_query.rst
    union
+   uuid
+   multiple_objects
+   select_some_fields
+   subquery
+   database_view
+   inspect_existing_database
 
 
 Indices and tables
