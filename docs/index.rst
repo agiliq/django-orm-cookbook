@@ -11,6 +11,8 @@ Django ORM Cookbook
 
    query.rst
    or_query.rst
+   and_query
+   notequal_query
    union
    uuid
    multiple_objects
@@ -18,6 +20,11 @@ Django ORM Cookbook
    subquery
    database_view
    inspect_existing_database
+   filefield
+   slugfield
+   join
+   truncate
+   second_largest
 
 
 Indices and tables
