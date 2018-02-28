@@ -40,8 +40,13 @@ class EventAdminSite(AdminSite):
 
 event_admin_site = EventAdminSite(name='event_admin')
 
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('id', 'epic', 'years_ago')
+    class Meta:
+        model = Event
+
 
 event_admin_site.register(Epic)
-event_admin_site.register(Event)
+event_admin_site.register(Event, EventAdmin)
 event_admin_site.register(EventHero)
 event_admin_site.register(EventVillain)

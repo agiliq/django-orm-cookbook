@@ -1,5 +1,6 @@
 from django.db import models
 from entities.models import Hero, Villain
+import uuid
 
 class Epic(models.Model):
     name = models.CharField(max_length=255)
@@ -8,6 +9,7 @@ class Epic(models.Model):
 
 
 class Event(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     epic = models.ForeignKey(Epic, on_delete=models.CASCADE)
     details = models.TextField()
     years_ago = models.PositiveIntegerField()
