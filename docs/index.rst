@@ -25,7 +25,9 @@ Django ORM Cookbook
    join
    truncate
    second_largest
-
+   query_relatedtool
+   agregation
+   slugfield
 
 Indices and tables
 ==================
