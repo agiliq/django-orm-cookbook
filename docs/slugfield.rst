@@ -1,2 +1,2 @@
-How can i use slug field with django for more readability?
+How to use slug field with django for more readability?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
