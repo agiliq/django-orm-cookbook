@@ -1,2 +1,2 @@
-How to select soem fields only in a queryset?
+How to select some fields only in a queryset?
 ++++++++++++++++++++++++++++++++++++++++++++++++++

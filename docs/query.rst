@@ -16,3 +16,4 @@ Example 2 ::
     >>> queryset = Event.objects.filter(id=1, years_ago__gt=5)
     >>> print(queryset.query)
     SELECT "events_event"."id", "events_event"."epic_id", "events_event"."details", "events_event"."years_ago" FROM "events_event" WHERE ("events_event"."years_ago" > 5 AND "events_event"."id" = 1)
+
