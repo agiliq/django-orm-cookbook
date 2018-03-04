@@ -1,2 +1,2 @@
-How to solve problems using query relted tools?
+How to solve problems using query related tools?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++

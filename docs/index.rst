@@ -14,12 +14,17 @@ Database Modelling
    one_to_one
    one_to_many
    many_to_many
+   self_fk
    existing_database
    database_view
    generic_models
    table_name
    column_name
    null_vs_blank
+   inspect_existing_database
+   uuid
+   slugfield
+
 
 
 Querying and Filtering
@@ -29,27 +34,60 @@ Querying and Filtering
    :maxdepth: 1
 
 
-
-   query.rst
-   or_query.rst
+   query
+   or_query
    and_query
    notequal_query
    union
-   uuid
-   multiple_objects
    select_some_fields
    subquery
-   database_view
-   inspect_existing_database
+   f_query
    filefield
-   slugfield
    join
-   truncate
    second_largest
+   duplicate
+   distinct
    query_relatedtool
    agregation
-   slugfield
    datetime
+   random
+   func_expressions
+
+Orderting things
+========================
+
+.. toctree::
+   :maxdepth: 1
+
+   asc_or_desc
+   case_insensitive
+   order_by_two
+   order_by_related_model
+   order_by_annotated_field
+
+
+Object Creation, Updation and Deletion
+===============================================
+
+.. toctree::
+   :maxdepth: 1
+
+   multiple_objects
+   copy
+   singleton
+   update_denormalized_fields
+   truncate
+   signals
+
+Testing
+===============================================
+.. toctree::
+   :maxdepth: 1
+
+   numqueries
+   keepdb
+   refresh_from_db
+   initial_data
 
 Indices and tables
 ==================
