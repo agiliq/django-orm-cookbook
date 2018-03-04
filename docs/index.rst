@@ -10,6 +10,7 @@ Database Modelling
 
 .. toctree::
    :maxdepth: 1
+   :numbered:
 
    one_to_one
    one_to_many
@@ -32,7 +33,7 @@ Querying and Filtering
 
 .. toctree::
    :maxdepth: 1
-
+   :numbered:
 
    query
    or_query
@@ -58,6 +59,7 @@ Orderting things
 
 .. toctree::
    :maxdepth: 1
+   :numbered:
 
    asc_or_desc
    case_insensitive
@@ -71,6 +73,7 @@ Object Creation, Updation and Deletion
 
 .. toctree::
    :maxdepth: 1
+   :numbered:
 
    multiple_objects
    copy
@@ -83,6 +86,7 @@ Testing
 ===============================================
 .. toctree::
    :maxdepth: 1
+   :numbered:
 
    numqueries
    keepdb
