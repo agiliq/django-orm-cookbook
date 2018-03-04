@@ -1,14 +1,34 @@
 Django ORM Cookbook is a book about doing things with Django ORM and Django models.
-Django is a “MTV” (Model-Template-View) framework – This book provides a deep dive into the `M` part.
+Django is a “MTV” (Model-Template-View) framework – This book provides a deep dive into the :code:`M` part.
 
-They take the form of about 50 questions of the form How to do X with Django ORM/Queryset.
+They take the form of about 50 questions of the form :code:`How to do X with Django ORM/Queryset/Models`.
 
 
-Django ORM Cookbook
+
+Database Modelling
 ===============================================
 
 .. toctree::
    :maxdepth: 1
+
+   one_to_one
+   one_to_many
+   many_to_many
+   existing_database
+   database_view
+   generic_models
+   table_name
+   column_name
+   null_vs_blank
+
+
+Querying and Filtering
+===============================================
+
+.. toctree::
+   :maxdepth: 1
+
+
 
    query.rst
    or_query.rst

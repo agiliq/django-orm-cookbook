@@ -1,2 +1,2 @@
-How to add a model for a database view?
+How to model one to many relationships?
 ===============================================
