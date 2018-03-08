@@ -22,7 +22,6 @@ Database Modelling
    table_name
    column_name
    null_vs_blank
-   inspect_existing_database
    uuid
    slugfield
    multiple_databases
