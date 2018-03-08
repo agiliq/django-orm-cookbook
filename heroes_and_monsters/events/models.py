@@ -47,3 +47,18 @@ class Article(models.Model):
 
     class Meta:
         ordering = ('headline',)
+
+class TempUser(models.Model):
+    first_name = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = "temp_user"
+
+
+class ColumnName(models.Model):
+    a = models.CharField(max_length=40,db_column='column1')
+    column2 = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.a
