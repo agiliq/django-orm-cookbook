@@ -25,6 +25,7 @@ Database Modelling
    inspect_existing_database
    uuid
    slugfield
+   multiple_databases
 
 
 
