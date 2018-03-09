@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 
 
 from django.contrib.admin import AdminSite
-from .models import Epic, Event, EventHero, EventVillain
+from .models import Epic, Event, EventHero, EventVillain, Article
 
 
 class EventAdminSite(AdminSite):
@@ -21,7 +21,8 @@ class EventAdminSite(AdminSite):
             "Event heros": 1,
             "Event villains": 2,
             "Epics": 3,
-            "Events": 4
+            "Events": 4,
+            "Articles": 5
         }
         app_dict = self._build_app_dict(request)
         # a.sort(key=lambda x: b.index(x[0]))
@@ -41,8 +42,15 @@ class EventAdmin(admin.ModelAdmin):
     class Meta:
         model = Event
 
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'headline', 'slug')
+    prepopulated_fields = {"slug": ("headline",)}
+    class Meta:
+        model = Article
+
 
 event_admin_site.register(Epic)
 event_admin_site.register(Event, EventAdmin)
 event_admin_site.register(EventHero)
 event_admin_site.register(EventVillain)
+event_admin_site.register(Article, ArticleAdmin)
