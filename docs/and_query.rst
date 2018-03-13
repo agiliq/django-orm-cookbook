@@ -16,5 +16,3 @@ Similarly our ORM query looks like ::
     queryset = User.objects.filter(first_name__startswith='R') & User.objects.filter(last_name__startswith='D')
     queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: rishab>]>
-
-The above example is not the optimised way of doing the desired query, as it hits the database twice. For getting the optimised result we will talk about Query related tools further in this book.
