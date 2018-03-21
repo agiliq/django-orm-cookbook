@@ -82,6 +82,6 @@ Respective models would be modified as ::
             class Meta:
             app_label = 'customer_data'
 
-Few helpful commnds while working with multiple databases. ::
+Few helpful commands while working with multiple databases. ::
 
         $ ./manage.py migrate --database=users_db
