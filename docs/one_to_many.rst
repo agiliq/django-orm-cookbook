@@ -38,4 +38,4 @@ If you try to assign an object before saving it you will encounter a ValueError 
     >>> Article.objects.filter(reporter=u1)
     <QuerySet [<Article: This is a test>, <Article: This is a test>]>
 
-The above queryset shows User u1 with multiple Articles. Hence One to Many.
+The above queryset shows User u1 with multiple :code:`Articles`. Hence One to Many.

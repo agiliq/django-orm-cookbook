@@ -31,4 +31,4 @@ The on_delete method is used to tell Django what to do with model instances that
 
     >>> u2.delete()
 
-Will also delete the related record of UserParent.
+Will also delete the related record of :code:`UserParent`.
