@@ -1,7 +1,7 @@
 How to model many to many relationships?
 ===============================================
 
-A many-to-many relationship refers to a relationship between tables in a database when a parent row in one table contains several child rows in the second table, and vice versa. ::
+A many-to-many relationship refers to a relationship between tables in a database when a parent row in one table contains several child rows in the second table, and vice versa.
 
 Just to make it more interactive, we will talk about a twitter app. By just using few fields and ManyToMany field we can make a simple twitter app.
 

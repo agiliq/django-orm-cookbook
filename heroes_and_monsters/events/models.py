@@ -11,7 +11,6 @@ class Epic(models.Model):
 
 
 class Event(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     epic = models.ForeignKey(Epic, on_delete=models.CASCADE)
     details = models.TextField()
     years_ago = models.PositiveIntegerField()
