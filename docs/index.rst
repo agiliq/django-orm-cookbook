@@ -3,10 +3,11 @@ Django is a “MTV” (Model-Template-View) framework – This book provides a d
 
 They take the form of about 50 questions of the form :code:`How to do X with Django ORM/Queryset/Models`.
 
+.. image:: BookCover.jpg
 
 
 Database Modelling
-===============================================
+==============================================
 
 .. toctree::
    :maxdepth: 1
