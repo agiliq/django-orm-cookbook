@@ -1,7 +1,7 @@
 How to order a queryset in ascending or descending order?
 =============================================================
 
-Ordering of the queryset can be achieved by order_by method. We need to pass the field on whose basis we need to Order (ascending/descending) the result.
+Ordering of the queryset can be achieved by :code:`order_by` method. We need to pass the field on which we need to Order (ascending/descending) the result.
 Query looks like this ::
 
     >>> User.objects.all().order_by('date_joined') // For ascending
