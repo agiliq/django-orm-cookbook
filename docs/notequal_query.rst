@@ -1,9 +1,20 @@
-How to do NOT EQUAL query in Django queryset?
+How to do a NOT query in Django queryset?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. image:: usertable.png
 
-Let's say we have a table called auth_user having fields as username, first_name, last_name,  email etc.., and we want to perform NOT operation for fetching users with id NOT < 5.
+If you are using :code:`django.contrib.auth`, you will have a table called :code:`auth_user`. It will have fields as :code:`username`, :code:`first_name`, :code:`last_name` and more.
+
+Say you want to fetch all users with id NOT < 5. You need a NOT operation.
+
+Django provides two options.
+
+- :code:`exclude(<condition>)`
+- :code:`filter(~Q(<condition>))`
+
+The query in detail
+-----------------------
+
 
 Our SQL query for the above condition will look somethng like ::
 
@@ -11,13 +22,17 @@ Our SQL query for the above condition will look somethng like ::
 
 .. image:: sqluser_notquery.png
 
-Way 1 using exclude ::
+Method 1 using exclude
+
+.. code-block
+
+
 
     >>> queryset = User.objects.exclude(id__lt=5)
     >>> queryset
     <QuerySet [<User: Ritesh>, <User: Billy>, <User: Radha>, <User: sohan>, <User: Raghu>, <User: rishab>]>
 
-Way 2 using Q() method aka query tools ::
+Method 2 using Q() method ::
 
     >>> from django.db.models import Q
     >>> queryset = User.objects.filter(~Q(id__lt=5))

@@ -10,6 +10,17 @@ You qould frequnenty need to want to perform AND operation, to find querysets wh
 
 Say you want to find users with :code:`firstname` starting with 'R' AND :code:`last_name` starting with 'D'.
 
+Django provides three options.
+
+- :code:`filter(<condition_1>, <condition_2>)`
+- :code:`queryset_1 & queryset_2`
+- :code:`filter(Q(<condition_1>) & Q(<condition_2>))`
+
+
+The query in detail
+-----------------------
+
+
 Our SQL query for the above condition will look something like
 
 .. code-block:: sql

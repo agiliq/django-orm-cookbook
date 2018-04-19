@@ -7,7 +7,15 @@ If you are using :code:`django.contrib.auth`, you will have a table called :code
 
 A common requirement is performing :code:`OR` filtering with two ore more conditions. Say you want find all users with firstname starting with 'R' and last_name starting with 'D'.
 
-THe SQL query for the above condition will look somethng like ::
+Django provides two options.
+
+- :code:`queryset_1 | queryset_2`
+- :code:`filter(Q(<condition_1>)|Q(<condition_2>)`
+
+The query in detail
+-----------------------
+
+The SQL query for the above condition will look something like ::
 
     SELECT username, first_name, last_name, email FROM auth_user WHERE first_name LIKE 'R%' OR last_name LIKE 'D%';
 
