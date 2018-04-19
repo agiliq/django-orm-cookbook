@@ -3,9 +3,14 @@ How to do AND queries in Django ORM?
 
 .. image:: usertable.png
 
-Let's say we have a table called auth_user having fields as username, first_name, last_name,  email etc.., and we want to perform OR operation on it with firstname starting with 'R' AND'ing last_name starting with 'D'.
+If you are using :code:`django.contrib.auth`, you will have a table called :code:`auth_user`. It will have fields as :code:`username`, :code:`first_name`, :code:`last_name` and more.
 
-Our SQL query for the above condition will look somethng like
+
+You qould frequnenty need to want to perform AND operation, to find querysets which match multiple criteria.
+
+Say you want to find users with :code:`firstname` starting with 'R' AND :code:`last_name` starting with 'D'.
+
+Our SQL query for the above condition will look something like
 
 .. code-block:: sql
 
