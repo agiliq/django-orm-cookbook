@@ -24,7 +24,7 @@ If you want to :code:`AND` your conditions.
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: rishab>]>
 
-If you want to find all users whose :code:`first_name`s starts with 'R', but not if the :code:`last_name` has 'Z'
+If you want to find all users whose :code:`first_name` starts with 'R', but not if the :code:`last_name` has 'Z'
 
 .. code-block:: ipython
 
