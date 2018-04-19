@@ -3,11 +3,22 @@ Find rows which have duplicate field values
 
 .. image:: usertable2.png
 
-We can find duplicate records from the query as under.::
+Say you want all users whose :code:`first_name` matchges another user.
 
-    >>> duplicates = User.objects.values('first_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
+You can find duplicate records using the technique below.
+
+.. code-block:: python
+
+    >>> duplicates = User.objects.values(
+        'first_name'
+        ).annotate(name_count=Count('first_name')).filter(name_count__gt=1)
     >>> duplicates
-    <QuerySet [{'first_name': 'John', 'id__count': 3}]>
+    <QuerySet [{'first_name': 'John', 'name_count': 3}]>
+
+If you need to fil all the records, you can do
+
+.. code-block:: python
+
     >>> records = User.objects.filter(first_name__in=[item['first_name'] for item in duplicates])
     >>> print([item.id for item in records])
     [2, 11, 13]

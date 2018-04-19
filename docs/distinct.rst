@@ -3,11 +3,17 @@ How to find distinct field values from queryset?
 
 .. image:: usertable2.png
 
-We can find distinct records from the query as under.::
+You want to find users whose names have not been repeated. You can do this like this
 
-    >>> distinct = User.objects.values('first_name').annotate(Count('id')).order_by().filter(id__count=1)
-    >>> distinct
-    <QuerySet [{'id__count': 1, 'first_name': 'Billy'}, {'id__count': 1, 'first_name': 'Paul'}, {'id__count': 1, 'first_name': 'Radha'}, {'id__count': 1, 'first_name': 'Raghu'}, {'id__count': 1, 'first_name': 'Ricky'}, {'id__count': 1, 'first_name': 'Rishabh'}, {'id__count': 1, 'first_name': 'Ritesh'}, {'id__count': 1, 'first_name': 'Sharukh'}, {'id__count': 1, 'first_name': 'Sohan'}, {'id__count': 1, 'first_name': 'Yash'}]>
-    >>> records = User.objects.filter(first_name__in=[item['first_name'] for item in distinct])
-    >>> print([item.id for item in records])
-    [1, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+.. code-block:: python
+
+    distinct = User.objects.values(
+        'first_name'
+    ).annotate(
+        name_count=Count('first_name')
+    ).filter(name_count=1)
+    records = User.objects.filter(first_name__in=[item['first_name'] for item in distinct])
+
+This is different from :code:`User.objects.distinct("first_name").all()`, which will pull up the first record when it encounters a distinct :code:`first_name`.
+
+
