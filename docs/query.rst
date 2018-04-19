@@ -1,19 +1,28 @@
 How to find the query associated with a queryset?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We have been working with Django ORM from long time, but deep inside us sometimes comes a thought how is django ORM making our queries execute or what is the SQL of the code which we are writing.
+Sometime you want to know how is Django ORM making our queries execute or what is the SQL of the code you are writing. This is very strightforward. Youn can get :code:`str` of any :code:`queryset.query` to get the sql.
 
-We have a model called events for querying it with django we will write something like ::
+You have a model called :code:`Event`. For getting all records, you will write something like
+:code:`Event.objects.all()`, then do :code:`str(queryset.query)`
 
-    >>> queryset = events.objects.all()
-    >>> print(queryset.query)
-    SELECT "events_event"."id", "events_event"."epic_id", "events_event"."details", "events_event"."years_ago" FROM "events_event"
+.. code-block:: python
+
+    >>> queryset = Event.objects.all()
+    >>> str(queryset.query)
+    SELECT "events_event"."id", "events_event"."epic_id",
+        "events_event"."details", "events_event"."years_ago"
+        FROM "events_event"
 
 .. image:: sql_query.png
 
-Example 2 ::
+Example 2
 
-    >>> queryset = Event.objects.filter(id=1, years_ago__gt=5)
-    >>> print(queryset.query)
-    SELECT "events_event"."id", "events_event"."epic_id", "events_event"."details", "events_event"."years_ago" FROM "events_event" WHERE ("events_event"."years_ago" > 5 AND "events_event"."id" = 1)
+.. code-block:: python
+
+    >>> queryset = Event.objects.filter(years_ago__gt=5)
+    >>> str(queryset.query)
+    SELECT "events_event"."id", "events_event"."epic_id", "events_event"."details",
+    "events_event"."years_ago" FROM "events_event"
+    WHERE ("events_event"."years_ago" > 5 AND "events_event"."id" = 1)
 

@@ -5,29 +5,10 @@ They take the form of about 50 questions of the form :code:`How to do X with Dja
 
 .. image:: BookCover.jpg
 
-
-Database Modelling
-==============================================
-
 .. toctree::
    :maxdepth: 1
-   :numbered:
 
-   one_to_one
-   one_to_many
-   many_to_many
-   self_fk
-   existing_database
-   database_view
-   generic_models
-   table_name
-   column_name
-   null_vs_blank
-   uuid
-   slugfield
-   multiple_databases
-
-
+   introduction
 
 Querying and Filtering
 ===============================================
@@ -54,6 +35,31 @@ Querying and Filtering
    datetime
    random
    func_expressions
+
+Database Modelling
+==============================================
+
+.. toctree::
+   :maxdepth: 1
+   :numbered:
+
+   one_to_one
+   one_to_many
+   many_to_many
+   self_fk
+   existing_database
+   database_view
+   generic_models
+   table_name
+   column_name
+   null_vs_blank
+   uuid
+   slugfield
+   multiple_databases
+
+
+
+
 
 Ordering things
 ========================
