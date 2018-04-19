@@ -1,6 +1,12 @@
 How to filter FileField without any file?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-Any :code:`FileField` or :code:`ImageField` mostly stores the path of the image wherever they are stored. So at sometimes when images/files are not stored the :code:`Field` will be left blank as a empty string. So to query FileField without any file we can query as under. ::
+A :code:`FileField` or :code:`ImageField` stores the path of the file or image. At the DB level they are same as a ::`CharField`.
 
-    no_files_objects = MyModel.objects.filter(file='') // This query will return all the objects of the model which don't have file stored in them.
+So to find FileField without any file we can query as under.
+
+.. code-block:: python
+
+    no_files_objects = MyModel.objects.filter(
+        Q(file='')|Q(file=None)
+    )

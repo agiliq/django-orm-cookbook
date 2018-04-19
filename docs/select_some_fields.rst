@@ -44,4 +44,4 @@ Alternatively, you can do
     SELECT "auth_user"."id", "auth_user"."first_name", "auth_user"."last_name"
     FROM "auth_user" WHERE "auth_user"."first_name"::text LIKE R%
 
-The only difference between :code:`only` and :code:`values` is :only:`only` also fetches the :code:`id`.
+The only difference between :code:`only` and :code:`values` is :code:`only` also fetches the :code:`id`.
