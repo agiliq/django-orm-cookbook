@@ -1,2 +1,2 @@
-What signals are raised by Django during object creation or updation?
+What signals are raised by Django during object creation or update?
 ========================================================================
