@@ -6,7 +6,7 @@ Django comes with functions like :code:`Lower`, :code:`Coalesce` and :code:`Max`
 Django provides :code:`Func` which allows using arbitrary database functions, even if Django doesn't provide them.
 
 
-Postgres has :code:`fuzzystrmatch`, which provides several functions to determine similarities. Install; the extension in your postgres DB with :code:`create extension fuzzystrmatch`
+Postgres has :code:`fuzzystrmatch`, which provides several functions to determine similarities. Install the extension in your postgres DB with :code:`create extension fuzzystrmatch`
 
 We will use the :code:`levenshtein` function. Lets first create some Hero objects.
 
