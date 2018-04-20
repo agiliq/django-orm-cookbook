@@ -31,8 +31,7 @@ Querying and Filtering
    duplicate
    distinct
    query_relatedtool
-   agregation
-   datetime
+   aggregation
    random
    func_expressions
 
@@ -88,6 +87,7 @@ Creating, Updating and Deleting things
    update_denormalized_fields
    truncate
    signals
+   datetime
 
 Testing
 ===============================================
