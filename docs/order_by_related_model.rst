@@ -29,10 +29,10 @@ If you look at the SQL.
 
 .. code-block:: sql
 
-SELECT "entities_hero"."id",
-       "entities_hero"."name",
-       -- more fields
-FROM "entities_hero"
-INNER JOIN "entities_category" ON ("entities_hero"."category_id" = "entities_category"."id")
-ORDER BY "entities_category"."name" ASC,
-         "entities_hero"."name" ASC
+    SELECT "entities_hero"."id",
+           "entities_hero"."name",
+           -- more fields
+    FROM "entities_hero"
+    INNER JOIN "entities_category" ON ("entities_hero"."category_id" = "entities_category"."id")
+    ORDER BY "entities_category"."name" ASC,
+             "entities_hero"."name" ASC
