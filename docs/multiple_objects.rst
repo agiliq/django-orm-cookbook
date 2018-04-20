@@ -6,11 +6,17 @@ We can use :code:`bulk_create` for creating multiple objects in one shot.
 
 Here is an example.
 
-.. code-block:: python
+.. code-block:: ipython
 
     >>> Category.objects.all().count()
     2
-    >>> Category.objects.bulk_create([Category(name="Foods Items"), Category(name="Fruits"), Category(name="Vegetables")])
-    [<Category: Foods Items>, <Category: Fruits>, <Category: Vegetables>]
+    >>> Category.objects.bulk_create(
+        [Category(name="God"),
+         Category(name="Demi God"),
+         Category(name="Mortal")]
+    )
+    [<Category: God>, <Category: Demi God>, <Category: Mortal>]
     >>> Category.objects.all().count()
     5
+
+:code:`bulk_create` takes a list of unsaved objects.
