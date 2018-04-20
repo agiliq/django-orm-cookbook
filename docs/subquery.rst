@@ -21,7 +21,7 @@ The models look something like this.
         name = models.CharField(max_length=100)
 
 
-    class Entity(models.Model):
+    class Hero(models.Model):
         # ...
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)

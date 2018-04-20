@@ -1,11 +1,28 @@
 How to order on an annotated field?
 ==========================================
 
-Here we will talk about two models i.e., :code:`Article` and :code:`User`. Article has FK relationship with User model. Here we will be counting the articles created by user and order them in ascending order. ::
+You have two models, :code:`Category` and :code:`Hero`.
+
+.. code-block:: python
+
+    class Category(models.Model):
+        name = models.CharField(max_length=100)
 
 
-    >>> from django.db.models import Sum
-    >>> Article.objects.values('reporter__username').annotate(reporter_article = Sum('reporter')).order_by('reporter_article')
-    <QuerySet [{'reporter_article': 2, 'reporter__username': 'yash'},
-     {'reporter_article': 10, 'reporter__username': 'John'},
-      {'reporter_article': 11, 'reporter__username': 'johny'}]>
+    class Hero(models.Model):
+        # ...
+        name = models.CharField(max_length=100)
+        category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+
+You want to get the :code:`Category`, ordered by number of :code:`Hero` in them. You can do this.
+
+.. code-block:: python
+
+    Category.objects.annotate(
+        hero_count=Count("hero")
+    ).order_by(
+        "-hero_count"
+    )
+
+
