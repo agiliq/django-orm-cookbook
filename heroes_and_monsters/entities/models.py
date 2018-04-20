@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.conf import settings
-
+from django.db import connection
 
 
 class Category(models.Model):
@@ -9,6 +9,12 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
+
+    @classmethod
+    def truncate(cls):
+        with connection.cursor() as cursor:
+            cursor.execute('TRUNCATE TABLE "{0}" CASCADE'.format(cls._meta.db_table))
+
 
     def __str__(self):
         return self.name
