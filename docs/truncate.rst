@@ -5,6 +5,8 @@ Truncate statement in SQL is meant to empty a table for future use.
 Though Django doesn't provide a builtin to truncate a table, but still similar result can be achived using :code:`delete()` method.
 For example:
 
+.. code-block:: python
+
     >>> Category.objects.all().count()
     7
     >>> Category.objects.all().delete()
@@ -25,4 +27,4 @@ This works, but this uses :code:`DELETE FROM ...` SQL statement. If you have a l
             with connection.cursor() as cursor:
                 cursor.execute('TRUNCATE TABLE "{0}" CASCADE'.format(cls._meta.db_table))
 
-Then you can call :code:`Category.truncate()` to a real DB, truncate.
+Then you can call :code:`Category.truncate()` to a real database truncate.

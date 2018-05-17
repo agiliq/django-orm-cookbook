@@ -103,7 +103,6 @@ Testing
    numqueries
    keepdb
    refresh_from_db
-   initial_data
 
 Indices and tables
 ==================
