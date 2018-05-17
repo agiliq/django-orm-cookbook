@@ -39,6 +39,37 @@ Querying and Filtering
    random
    func_expressions
 
+
+Creating, Updating and Deleting things
+===============================================
+
+.. toctree::
+   :maxdepth: 1
+   :numbered:
+
+   multiple_objects
+   copy
+   singleton
+   update_denormalized_fields
+   truncate
+   signals
+   datetime
+
+
+Ordering things
+========================
+
+.. toctree::
+   :maxdepth: 1
+   :numbered:
+
+   asc_or_desc
+   case_insensitive
+   order_by_two
+   order_by_related_model
+   order_by_annotated_field
+
+
 Database Modelling
 ==============================================
 
@@ -62,36 +93,6 @@ Database Modelling
 
 
 
-
-
-Ordering things
-========================
-
-.. toctree::
-   :maxdepth: 1
-   :numbered:
-
-   asc_or_desc
-   case_insensitive
-   order_by_two
-   order_by_related_model
-   order_by_annotated_field
-
-
-Creating, Updating and Deleting things
-===============================================
-
-.. toctree::
-   :maxdepth: 1
-   :numbered:
-
-   multiple_objects
-   copy
-   singleton
-   update_denormalized_fields
-   truncate
-   signals
-   datetime
 
 Testing
 ===============================================

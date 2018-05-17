@@ -1,7 +1,7 @@
 How to filter FileField without any file?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-A :code:`FileField` or :code:`ImageField` stores the path of the file or image. At the DB level they are same as a ::`CharField`.
+A :code:`FileField` or :code:`ImageField` stores the path of the file or image. At the DB level they are same as a :code:`CharField`.
 
 So to find FileField without any file we can query as under.
 

@@ -1,18 +1,18 @@
-How to include a self-referencing Foreignkey in a model
+How to include a self-referencing ForeignKey in a model
 ========================================================================
 
-Self-referencing fk (recursive relationship)  works similar to what we do for One to Many relationships. But as the name suggests, the model references itself. Among other things, they are useful to model nested relationships.
+Self-referencing foreign keys are used to model nested relationships or recursive relationships. They work similar to how One to Many relationships. But as the name suggests, the model references itself.
 
 Self reference Foreignkey can be achived in two ways.
 
 .. code-block:: python
 
 
-    class Parent(models.Model):
-        parent_ref = models.ForeignKey('self', on_delete=models.CASCADE))
+    class Employee(models.Model):
+        manager = models.ForeignKey('self', on_delete=models.CASCADE))
 
     # OR
 
-    class Parent(models.Model):
-        parent_ref = models.ForeignKey("Parent", on_delete=models.CASCADE))
+    class Employee(models.Model):
+        manager = models.ForeignKey("app.Employee", on_delete=models.CASCADE))
 
