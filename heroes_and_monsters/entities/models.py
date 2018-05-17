@@ -24,6 +24,18 @@ class Category(models.Model):
         return self.name
 
 
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+# ...
+
+class FlexCategory(models.Model):
+    name = models.SlugField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+
+
 class Origin(models.Model):
     name = models.CharField(max_length=100)
 
@@ -48,6 +60,7 @@ class Entity(models.Model):
 
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    flex_category = GenericRelation(FlexCategory, related_query_name='flex_category')
     origin = models.ForeignKey(Origin, on_delete=models.CASCADE)
     gender = models.CharField(
         max_length=100,
