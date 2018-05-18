@@ -12,4 +12,4 @@ Naming of a column in the model can be achieved py passing a :code:`db_column` p
 
 .. image:: db_column.png
 
-Above we can :code:`db_coloumn` has higher priority over :code:`field name`. First column is named as column1 but not as a.
+Above we can :code:`db_column` has higher priority over :code:`field name`. First column is named as column1 but not as a.
