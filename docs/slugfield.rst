@@ -1,7 +1,7 @@
 How to use slug field with django for more readability?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Slug is a part of a URL which identifies a particular page on a website in a form readable by users. For making it work django od=ffers us a slugfield. It can be implimented as under.
+Slug is a part of a URL which identifies a particular page on a website in a form readable by users. For making it work django offers us a slugfield. It can be implimented as under.
 We already had a model :code:`Article` we will be adding slugfield to it to make it user readable. ::
 
     from django.utils.text import slugify
