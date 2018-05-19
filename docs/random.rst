@@ -17,14 +17,14 @@ Your :code:`category` models is like this.
 
 You want to get a random Category. We will look at few alternate ways to do this.
 
-The most straightforward way, you can order_by random and fetch the first record. It would look something like this.
+The most straightforward way, you can :code:`order_by` random and fetch the first record. It would look something like this.
 
 .. code-block:: python
 
     def get_random():
         return Category.objects.order_by("?").first()
 
-Note: :code:`order_by('?')` queries may be expensive and slow, depending on the database backend you’re using. To test other methods, we need to instert one million records in :code:`Category` table. Go to your db like with :code:`python manage.py dbshell` and run this.
+Note: :code:`order_by('?')` queries may be expensive and slow, depending on the database backend you’re using. To test other methods, we need to insert one million records in :code:`Category` table. Go to your db like with :code:`python manage.py dbshell` and run this.
 
 .. code-block:: sql
 
@@ -58,7 +58,7 @@ generate a random number in range [1, max_id], and filter that. You are assuming
     In [6]: get_random2()
     Out[6]: <Category: f164ad0c5bc8300b469d1c428a514cc1>
 
-If your models has deletions, you can sligthtly modify the functions, to loop until you get a valid :code:`Category`.
+If your models has deletions, you can slightly modify the functions, to loop until you get a valid :code:`Category`.
 
 .. code-block:: python
 
