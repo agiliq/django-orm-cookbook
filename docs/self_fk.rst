@@ -9,10 +9,10 @@ Self reference Foreignkey can be achived in two ways.
 
 
     class Employee(models.Model):
-        manager = models.ForeignKey('self', on_delete=models.CASCADE))
+        manager = models.ForeignKey('self', on_delete=models.CASCADE)
 
     # OR
 
     class Employee(models.Model):
-        manager = models.ForeignKey("app.Employee", on_delete=models.CASCADE))
+        manager = models.ForeignKey("app.Employee", on_delete=models.CASCADE)
 
