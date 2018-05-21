@@ -2,7 +2,7 @@ How to do union of two querysets from same or different models?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The UNION operator is used to combine the result-set of two or more querysets.
-The querysets can be from the same or from different models. When they querysets are from different models, the fields and their datatypes shoudl match.
+The querysets can be from the same or from different models. When they querysets are from different models, the fields and their datatypes should match.
 
 Let's continue with our :code:`auth_user` model and generate 2 querysets to perform union operation
 

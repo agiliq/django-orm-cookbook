@@ -16,7 +16,7 @@ The query in detail
 -----------------------
 
 
-Our SQL query for the above condition will look somethng like ::
+Our SQL query for the above condition will look something like ::
 
     SELECT id, username, first_name, last_name, email FROM auth_user WHERE NOT id < 5;
 
