@@ -82,7 +82,7 @@ And then get a :code:`Hero` categorised as 'ghost' like this
 
 .. code-block:: python
 
-    FlexCategory.objects.create(content_object=hero, name="mythic")
+    FlexCategory.objects.create(content_object=hero, name="ghost")
 
 This gives us this sql.
 
