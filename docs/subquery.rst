@@ -1,4 +1,4 @@
-How to do a subquery experession in Django?
+How to do a subquery expression in Django?
 =============================================
 
 Django allows using SQL subqueries.
@@ -32,7 +32,7 @@ The models look something like this.
         )
 
 
-You can find the most benevolvent Hero like this
+You can find the most benevolent Hero like this
 
 .. code-block:: python
 

@@ -6,7 +6,7 @@ How to do AND queries in Django ORM?
 If you are using :code:`django.contrib.auth`, you will have a table called :code:`auth_user`. It will have fields as :code:`username`, :code:`first_name`, :code:`last_name` and more.
 
 
-You qould frequnenty need to want to perform AND operation, to find querysets which match multiple criteria.
+You would frequently need to want to perform AND operation, to find querysets which match multiple criteria.
 
 Say you want to find users with :code:`firstname` starting with 'R' AND :code:`last_name` starting with 'D'.
 
@@ -48,7 +48,7 @@ Alternatively, you can explicitly use the `&` operator on querysets.
         last_name__startswith='D'
     )
 
-For complete customisibility, you can use the :code:`Q` objects.
+For complete customisability, you can use the :code:`Q` objects.
 
 .. code-block:: python
 

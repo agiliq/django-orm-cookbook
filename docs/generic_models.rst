@@ -26,7 +26,7 @@ You have models like this.
         # ...
 
 
-:code:`Category` can be applied is a `generic` model. You prbably want to be able to apply categogies to objects form any model class.
+:code:`Category` can be applied is a `generic` model. You prbably want to be able to apply categories to objects form any model class.
 You can do it like this
 
 
@@ -82,7 +82,7 @@ And then get a :code:`Hero` categorised as 'ghost' like this
 
 .. code-block:: python
 
-    FlexCategory.objects.create(content_object=hero, name="mythic")
+    FlexCategory.objects.create(content_object=hero, name="ghost")
 
 This gives us this sql.
 

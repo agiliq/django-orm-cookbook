@@ -1,9 +1,9 @@
 How to use :code:`Q` objects for complex queries?
 ==================================================
 
-In previous chapters we used :code:`Q` objects for :code:`OR` and :code:`AND` and :code:`NOT ` operations. :code:`Q` objects provides you complete control over the where clause of the query.
+In previous chapters we used :code:`Q` objects for :code:`OR` and :code:`AND` and :code:`NOT` operations. :code:`Q` objects provides you complete control over the where clause of the query.
 
-If you want to :code:OR your conditions.
+If you want to :code:`OR` your conditions.
 
 .. code-block:: ipython
 

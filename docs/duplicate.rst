@@ -3,7 +3,7 @@ Find rows which have duplicate field values
 
 .. image:: usertable2.png
 
-Say you want all users whose :code:`first_name` matchges another user.
+Say you want all users whose :code:`first_name` matches another user.
 
 You can find duplicate records using the technique below.
 
@@ -15,7 +15,7 @@ You can find duplicate records using the technique below.
     >>> duplicates
     <QuerySet [{'first_name': 'John', 'name_count': 3}]>
 
-If you need to fil all the records, you can do
+If you need to fill all the records, you can do
 
 .. code-block:: python
 
