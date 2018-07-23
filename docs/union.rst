@@ -11,7 +11,7 @@ Let's continue with our :code:`auth_user` model and generate 2 querysets to perf
     >>> q1 = User.objects.filter(id__gte=5)
     >>> q1
     <QuerySet [<User: Ritesh>, <User: Billy>, <User: Radha>, <User: sohan>, <User: Raghu>, <User: rishab>]>
-    >>> q2 = q2 = User.objects.filter(id__lte=9)
+    >>> q2 = User.objects.filter(id__lte=9)
     >>> q2
     <QuerySet [<User: yash>, <User: John>, <User: Ricky>, <User: sharukh>, <User: Ritesh>, <User: Billy>, <User: Radha>, <User: sohan>, <User: Raghu>]>
     >>> q1.union(q2)
