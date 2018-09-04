@@ -14,7 +14,7 @@
 
    introduction
 
-Querying and Filtering
+쿼리셋과 필터링
 ===============================================
 
 .. toctree::
