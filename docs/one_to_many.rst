@@ -1,8 +1,9 @@
-How to model one to many relationships?
+일대다 관계는 어떻게 모델링하는가?
 ===============================================
 
-In relational databases, a one-to-many relationship occurs when a parent record in one table can potentially reference several child records in another table. In a one-to-many relationship, the parent is not required to have child records; therefore, the one-to-many relationship allows zero child records, a single child record or multiple child records.
-To define a many-to-one relationship, use `ForeignKey`.::
+관계형 데이터베이스에서는 한 테이블의 상위 레코드가 다른 테이블의 여러 하위 레코드를 참조할 수 있는 경우 일대다 관계가 발생합니다.
+일대다 관계에서 상위 레코드가 하위 레코드를 필수적으로 가질 필요는 없습니다. 따라서 일대다 관계는 0개의 하위 레코드, 하나의 하위 레코드 또는 여러 개의 하위 레코드를 허용합니다.
+일대다 관계를 정의하려면 ForeignKey를 사용하세요. ::
 
     class Article(models.Model):
         headline = models.CharField(max_length=100)
@@ -27,7 +28,7 @@ To define a many-to-one relationship, use `ForeignKey`.::
     >>> a1.reporter
     <User: johny1>
 
-If you try to assign an object before saving it you will encounter a ValueError ::
+객체를 저장하기 전에 객체를 할당하려고 하면 ValueError가 발생합니다. ::
 
     >>> u3 = User(username='someuser', first_name='Some', last_name='User', email='some@example.com')
     >>> Article.objects.create(headline="This is a test", pub_date=date(2018, 3, 7), reporter=u1)
@@ -38,4 +39,4 @@ If you try to assign an object before saving it you will encounter a ValueError 
     >>> Article.objects.filter(reporter=u1)
     <QuerySet [<Article: This is a test>, <Article: This is a test>]>
 
-The above queryset shows User u1 with multiple :code:`Articles`. Hence One to Many.
+위의 쿼리셋은 u1의 여러 개의 :code:`Articles`를 보여줍니다. 따라서 일대다 관계임을 알 수 있습니다.

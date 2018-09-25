@@ -1,9 +1,9 @@
-How to model one to one relationships?
+일대일 관계는 어떻게 모델링하는가?
 ===============================================
 
-One-to-one relationships occur when there is exactly one record in the first table that corresponds to one record in the related table.
-Here we have an example where we know that each individual can have only one Biological parents i.e., Mother and Father.
-We already have auth user model with us, we will add a new model UserParent as described below. ::
+관계 테이블의 한 레코드에 상응하는 단 하나의 레코드가 있을때 일대일 관계가 발생합니다.
+여기 우리가 잘 알고 있는 예시가 있습니다. 각 개인은 단 하나의 생물학적 부모 즉, 어머니와 아버지를 가질 수 있습니다.
+우리는 사용자 인증 모델을 가지고 있으므로, 아래에 설명한 대로 새로운 UserParent 모델을 추가할 것입니다. ::
 
     from django.contrib.auth.models import User
 
@@ -27,8 +27,9 @@ We already have auth user model with us, we will add a new model UserParent as d
     >>> p2.user.last_name
     'Upadhyay'
 
-The on_delete method is used to tell Django what to do with model instances that depend on the model instance you delete. (e.g. a ForeignKey relationship). The on_delete=models.CASCADE tells Django to cascade the deleting effect i.e. continue deleting the dependent models as well. ::
+on_delete 메서드는 Django에 삭제하려는 모델 인스턴스에 의존하는 모델 인스턴스를 어떻게 처리해야 할지 지시합니다. (예: ForeignKey 관계)
+on_delete=models.CASCADE는 계단식 삭제 즉, 종속모델까지 삭제하도록 Django에 지시합니다. ::
 
     >>> u2.delete()
 
-Will also delete the related record of :code:`UserParent`.
+이것은 :code:`UserParent` 의 관계 레코드까지 함께 삭제합니다.

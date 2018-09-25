@@ -1,13 +1,14 @@
-How to model many to many relationships?
+다대다 관계는 어떻게 모델링하는가?
 ===============================================
 
-A many-to-many relationship refers to a relationship between tables in a database when a parent row in one table contains several child rows in the second table, and vice versa.
+다대다 관계는 하나의 레코드가 관계테이블의 여러 하위 레코드를 가질 수 있으며, 반대로도 가능합니다.
 
-Just to make it more interactive, we will talk about a twitter app. By just using few fields and ManyToMany field we can make a simple twitter app.
+인터렉티브한 것을 만들기 위해서, 트위터 앱에 관해 이야기 하려고 합니다.
+우리는 몇 개의 필드와 ManyToMany 필드를 이용하여 간단한 트위터 앱을 만들 수 있습니다.
+트위터에는 세 가지 기본적인 항목이 있습니다. 트윗, 팔로워, 마음에 들어요/마음에 들어요 취소
 
-We basically have 3 basic things in Twitter, tweets, followers, favourite/unfavourite.
-
-We have two models to make everything work. We are inheriting django's auth_user.::
+여기에 이 모든 것을 작동하게 하는 두 개의 모델이 있습니다.
+우리는 여기서 Django의 auth_user를 상속할 것입니다. ::
 
     class User(AbstractUser):
         tweet = models.ManyToManyField(Tweet, blank=True)
@@ -16,19 +17,18 @@ We have two models to make everything work. We are inheriting django's auth_user
 
     class Tweet(models.Model):
         tweet = models.TextField()
-        favourite = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='user_favourite')
+        favorite = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='user_favorite')
 
         def __unicode__(self):
             return self.tweet
 
-What will the above model be able to do ? ::
+위에 정의된 모델은 어떤 것이 가능할까요? ::
 
-    1) User will able to follow/unfollow other users.
-    2) User will able to see tweets made by other users whom user is following.
-    3) User is able to favorite/unfavorite tweets.
+    1) 사용자는 다른 사용자를 팔로우/팔로우 취소를 할 수 있습니다.
+    2) 사용자는 팔로잉하고 있는 사용자가 작성한 트윗을 볼 수 있습니다.
+    3) 사용자는 트윗에 마음에 들어요/마음에 들어요 취소를 할 수 있습니다.
 
-
-Few operations using ManyToManyfield which can be done are: ::
+다대다 관계를 사용하여 수행할 수 있는 몇 가지 작업이 있습니다.: ::
 
     >>> t1 = Tweet(tweet="I am happy today")
     >>> t1.save()
@@ -41,22 +41,22 @@ Few operations using ManyToManyfield which can be done are: ::
     >>> u3 = User(username='someuser', first_name='Some', last_name='User', email='some@example.com')
     >>> u3.save()
 
-We have created few tweets and few users, that didn't involve any use of M2M field so far. Lets continue linking them in next step. ::
+여기까지는 ManyToMany 필드의 어떤 용법도 사용하지 않은 채, 몇 개의 트윗과 사용자를 생성했습니다. 다음에는 이것들을 연결해봅시다. ::
 
     >>> u2.tweet.add(t1)
     >>> u2.save()
     >>> u2.tweet.add(t2)
     >>> u2.save()
-    // User can follow other users.
+    // 사용자는 다른 사용자를 팔로우할 수 있습니다.
     >>> u2.follow.add(u1)
     >>> u2.save()
-    // Tweets are linked to the users. Users have folloewd each other. Now we can make users do favourite/unfavourite of the tweets.
-    >>> t1.favourite.add(u1)
+    // 트윗은 사용자에게 연결되어 있습니다. 이제 사용자들이 트윗에 마음에 들어요/마음에 들어요 취소를 하게 할 수 있습니다.
+    >>> t1.favorite.add(u1)
     >>> t1.save()
-    >>> t1.favourite.add(u3)
+    >>> t1.favorite.add(u3)
     >>> t1.save()
-    // For removing any users vote
-    >>> t1.favourite.remove(u1)
+    // 사용자가 마음에 들어요 한 것을 취소하려면
+    >>> t1.favorite.remove(u1)
     >>> t1.save()
 
-Working example can be found in the repo: https://github.com/yashrastogi16/simpletwitter
+작동하는 예제는 여기에서 볼 수 있습니다. : https://github.com/yashrastogi16/simpletwitter
