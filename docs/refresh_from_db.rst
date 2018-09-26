@@ -3,7 +3,7 @@
 
 | ``refresh_from_db()`` 메서드를 사용하여 데이터베이스에서 모델을 다시 로드할 수 있습니다.
 | 이것은 테스트에서 유용할 것입니다. 예를 들면,
-
+| 
 .. code-block:: python
 
   class TestORM(TestCase):
