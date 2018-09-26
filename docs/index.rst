@@ -1,11 +1,11 @@
-Django ORM Cookbook
+장고 ORM 요리책
 +++++++++++++++++++++++
 
 
-Django ORM Cookbook is a book about doing things with Django ORM and Django models.
-Django is a “MTV” (Model-Template-View) framework – This book provides a deep dive into the :code:`M` part.
+장고 ORM 요리책은 장고 ORM 과 장고의 모델을 사용하는 방법에 관한 책입니다.
+장고는 "MTV"(모델-템플릿-뷰) 프레임워크입니다 - 이 책은 모델 파트에 대한 내용을 자세히 다룹니다.
 
-They take the form of about 50 questions of the form :code:`How to do X with Django ORM/Queryset/Models`.
+이 책은 장고 ORM/쿼리셋/모델의 사용법에 관한 50가지의 질문으로 구성되어 있습니다.
 
 .. image:: BookCover.jpg
 
@@ -14,7 +14,7 @@ They take the form of about 50 questions of the form :code:`How to do X with Dja
 
    introduction
 
-Querying and Filtering
+쿼리셋과 필터링
 ===============================================
 
 .. toctree::

@@ -1,8 +1,8 @@
-How to order on a field from a related model (with a foreign key)?
+어떻게 다른 테이블과 연결된 필드(외래키)를 기준으로 정렬할 수 있을까요?
 ========================================================================
 
 
-You have two models, :code:`Category` and :code:`Hero`.
+:code:`Category` 와 :code:`Hero` 모델 두 개가 있습니다.
 
 .. code-block:: python
 
@@ -15,7 +15,7 @@ You have two models, :code:`Category` and :code:`Hero`.
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-You want to order :code:`Hero` by category and inside each category by the :code:`Hero` name. You can do.
+:code:`Hero` 안에 있는 :code:`Hero` 의 이름을 통해 정렬하려면 다음과 같이 할 수 있습니다.
 
 .. code-block:: python
 
@@ -23,9 +23,10 @@ You want to order :code:`Hero` by category and inside each category by the :code
         'category__name', 'name'
     )
 
-Note the double underscore(:code:`__` ) in :code:`'category__name'`. Using the double undertscore, you can order on a field from a related model.
+:code:`'category__name'`안에 있는 더블 언더스코어(:code:`__` )를 주의 깊게 살펴보세요.
+더블 언더스코어를 사용하면, 연결된 모델의 필드를 기준으로 정렬할 수 있습니다.
 
-If you look at the SQL.
+SQL을 살펴보겠습니다.
 
 .. code-block:: sql
 
