@@ -1,8 +1,7 @@
-How to create a generic model which can be related to any kind of entity? (Eg. a Category or a Comment?)
+어떤 종류의 개체와도 연관 지을 수 있는 Generic 모델을 만드는 방법은? (예: 카테고리 또는 코멘트)
 =============================================================================================================
 
-
-You have models like this.
+다음과 같은 모델이 있습니다.
 
 .. code-block:: python
 
@@ -26,9 +25,8 @@ You have models like this.
         # ...
 
 
-:code:`Category` can be applied is a `generic` model. You prbably want to be able to apply categories to objects form any model class.
-You can do it like this
-
+| ``Category`` 는 일반적인 모델입니다. 당신은 아마도 여러 모델 클래스 오브젝트에 카테고리를 적용하고 싶을 것입니다.
+| 그렇다면 다음과 같이 할 수 있습니다.
 
 .. code-block:: python
 
@@ -54,40 +52,36 @@ You can do it like this
         flex_category = GenericRelation(FlexCategory, related_query_name='flex_category')
         # ...
 
+| ``FlexCategory`` 에 ``ForeignKey`` 와 ``PositiveIntegerField`` 를 사용하여 ``GenericForeignKey`` 필드를 적용했습니다.
+| 그리고 카테고리를 적용하려는 모델에 ``GenericRelation`` 을 추가했습니다.
+|
+| 데이터베이스 레벨에서 보면 다음과 같습니다.
 
-What did we do, we added we added a :code:`GenericForeignKey` fields on :code:`FlexCategory` using one :code:`ForeignKey` and one :code:`PositiveIntegerField`, then
-added a :code:`GenericRelation` on the models you want to categorize.
+================== ======================= ====================================================================
+ Column             Type                    Modifiers
+================== ======================= ====================================================================
+ id                 integer                 not null default nextval('entities_flexcategory_id_seq'::regclass)
+ name               character varying(50)   not null
+ object_id          integer                 not null
+ content_type_id    integer                 not null
+================== ======================= ====================================================================
 
-
-At the database level it looks like this:
-
-.. code-block
-
-         Column      |         Type          |                             Modifiers
-    -----------------+-----------------------+--------------------------------------------------------------------
-     id              | integer               | not null default nextval('entities_flexcategory_id_seq'::regclass)
-     name            | character varying(50) | not null
-     object_id       | integer               | not null
-     content_type_id | integer               | not null
-
-
-You can categorize a :code:`Hero` like this.
+``Hero`` 는 다음과 같이 카테고리를 생성할 수 있습니다.
 
 
 .. code-block:: python
-
+    hero = Hero.objects.create(name='Hades')
     FlexCategory.objects.create(content_object=hero, name="mythic")
 
-And then get a :code:`Hero` categorised as 'ghost' like this
+'ghost'로 분류된 ``Hero`` 는 다음과 같이 얻을 수 있습니다.
 
 .. code-block:: python
 
-    FlexCategory.objects.create(content_object=hero, name="ghost")
+    Hero.objects.filter(flex_category__name='ghost')
 
-This gives us this sql.
+위의 쿼리는 다음과 같은 sql을 만듭니다.
 
 .. code-block:: sql
-
 
     SELECT "entities_hero"."name"
     FROM "entities_hero"
