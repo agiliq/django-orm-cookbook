@@ -1,7 +1,7 @@
-How to perform join operations in django ORM?
+Django ORM에서 join 연산이 어떻게 작동하나요?
 ======================================================
 
-A SQL Join statement is used to combine data or rows from two or more tables based on a common field between them. Join can be carried out in many ways. Some are shown below. ::
+SQL Join문은 둘 이상의 테이블 사이에서 공통 필드를 기반으로 데이터 혹은 행을 결합하는 데 사용됩니다. Join은 여러 방법으로 수행될 수 있으며 몇가지 예시는 아래와 같습니다. ::
 
     >>> a1 = Article.objects.select_related('reporter') // Using select_related
     >>> a1
