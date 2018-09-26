@@ -4,6 +4,7 @@
 | Django 에는 존재하는 데이터베이스를 검토하여 모델로 생성할 수 있는 ``inspectdb`` 라는 기능이 있습니다.
 | 다음과 같은 명령어로 결과를 확인할 수 있습니다.
 
+
 ::
 
     $ python manage.py inspectdb
