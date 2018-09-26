@@ -1,12 +1,12 @@
-How to filter a queryset with criteria based on comparing their field values
+필드 값 비교를 기준으로 쿼리셋 필터링 하기
 ==============================================================================
 
-Django ORM makes it easy to filter based on fixed values.
-To get all :code:`User` objects with :code:`first_name` starting with :code:`'R'`,
-you can do :code:`User.objects.filter(first_name__startswith='R')`.
+Django ORM은 고정된 값으로 필터링하는 것을 도와줍니다.
+:code:`first_name` 이 :code:`'R'` 로 시작하는 :code:`User` Object를 얻기 위해 
+:code:`User.objects.filter(first_name__startswith='R')` 를 쓸 수 있습니다.
+만약 first_name과 last_name을 비교하고 싶다면 :code:`F` obejct를 쓸 수 있습니다.
+먼저 user를 만들어보겠습니다.
 
-What if you want to compare the first_name and last name?
-You can use the :code:`F` object. Create some users first.
 
 .. code-block:: ipython
 
@@ -16,16 +16,16 @@ You can use the :code:`F` object. Create some users first.
     In [28]: User.objects.create_user(email="guido@example.com", username="Guido", first_name="Guido", last_name="Guido")
     Out[28]: <User: Guido>
 
-Now you can find the users where :code:`first_name==last_name`
+이제 fisrt_name과 last_name이 같은 유저를 찾을 수 있습니다.
+
 
 .. code-block:: ipython
 
     In [29]: User.objects.filter(last_name=F("first_name"))
     Out[29]: <QuerySet [<User: Guido>]>
 
-:code:`F` also works with calculated field using annotate. What if we wanted users whose first and last names have same letter?
-
-You can set the first letter from a string using :code:`Substr("first_name", 1, 1)`, so we do.
+:code:`F` object는 annotate를 사용하여 계산된 필드에서도 사용할 수 있습니다.
+만약 first_name과 last_name의 첫글자가 같은 유저를 찾길 원한다면 :code:`Substr("first_name", 1, 1)` 를 사용할 수 있습니다.
 
 .. code-block:: ipython
 
@@ -35,4 +35,5 @@ You can set the first letter from a string using :code:`Substr("first_name", 1, 
     In [46]: User.objects.annotate(first=Substr("first_name", 1, 1), last=Substr("last_name", 1, 1)).filter(first=F("last"))
     Out[46]: <QuerySet [<User: Guido>, <User: Tim>]>
 
-:code:`F` can also be used with :code:`__gt`, :code:`__lt` and other expressions.
+또한 :code:`F` object는 :code:`__gt`, :code:`__lt` 나 다른 expression과 함께 사용 가능합니다.
+
