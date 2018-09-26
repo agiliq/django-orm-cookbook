@@ -1,9 +1,7 @@
-How to filter FileField without any file?
+어떻게 파일이 없는 Object를 FileField로 필터링 하나요?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-A :code:`FileField` or :code:`ImageField` stores the path of the file or image. At the DB level they are same as a :code:`CharField`.
-
-So to find FileField without any file we can query as under.
+:code:`FileField` 나 :code:`ImageField` 는 파일이나 이미지의 경로를 저장합니다. Database 레벨에선 둘 모두 :code:`CharField` 로 같습니다. 아래의 쿼리로 파일이 없는 object를 찾을 수 있습니다.
 
 .. code-block:: python
 
