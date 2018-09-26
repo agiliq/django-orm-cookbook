@@ -1,7 +1,7 @@
-How to order on an annotated field?
+Annotate된 필드를 어떻게 정렬할 수 있을까요?
 ==========================================
 
-You have two models, :code:`Category` and :code:`Hero`.
+:code:`Category` 와 :code:`Hero` 모델이 있습니다.
 
 .. code-block:: python
 
@@ -15,7 +15,7 @@ You have two models, :code:`Category` and :code:`Hero`.
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
-You want to get the :code:`Category`, ordered by number of :code:`Hero` in them. You can do this.
+:code:`Category` 안에 속한 :code:`Hero` 의 숫자에 따라 정렬하고 싶다면, 다음과 같이 할 수 있습니다.
 
 .. code-block:: python
 
@@ -24,5 +24,3 @@ You want to get the :code:`Category`, ordered by number of :code:`Hero` in them.
     ).order_by(
         "-hero_count"
     )
-
-
