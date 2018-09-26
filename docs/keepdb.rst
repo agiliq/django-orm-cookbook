@@ -1,15 +1,12 @@
-How to speed tests by reusing database between test runs?
+테스트 실행을 할 때, 데이터베이스 재사용으로 테스트 속도를 높이는 방법은?
 ================================================================
 
-When we execute the command :code:`python manage.py test`, a new db is created everytime. This doesn't matter much if we don't have many migrations.
-
-But when we have many migrations, it takes a long time to recreate the database between the test runs. To avoid such situations, we may reuse the old database.
-
-You can prevent the test databases from being destroyed by adding the :code:`--keepdb` flag to the test command. This will preserve the test database between runs. If the database does not exist, it will first be created. If any migrations have been added since the last test run,
-they will be applied in order to keep it up to date.
-
+| ``python manage.py test`` 명령을 실행할 때 마다 새로운 데이터베이스가 생성됩니다. 마이그레이션이 많지 않다면 이것은 그다지 문제가 되지 않습니다.
+| 하지만 마이그레이션이 많은 경우, 테스트를 실행할 때 데이터베이스 재생성에 많은 시간을 소요하게 됩니다. 이런 상황을 피하기 위해서 이전에 생성된 데이터베이스를 사용할 수 있습니다.
+|
+| 테스트 명령에 ``--keepdb`` 플래그를 추가하면 데이터베이스가 삭제되는 것을 막고 테스트 실행 간 데이터베이스를 유지할 수 있습니다.
+| 데이터베이스가 존재하지 않으면, 우선 데이터베이스를 생성합니다. 마지막 테스트 실행 이후 마이그레이션이 추가되면, 최신 상태를 유지하기 위해 이를 적용합니다.
 
 .. code-block:: bash
 
     $ python manage.py test --keepdb
-
