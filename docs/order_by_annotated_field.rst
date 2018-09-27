@@ -1,7 +1,7 @@
 주석처리된(annotated) 필드를 어떻게 정렬할 수 있을까?
 ==========================================
 
-여기 2개의 모델이 있습니다. :code:`Category` and :code: `Hero`.
+여기 2개의 모델이 있습니다. :code:`Category` and :code:`Hero`.
 
 .. code-block:: python
 
