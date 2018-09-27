@@ -2,7 +2,7 @@ Foreign key로 연결된 모델의 필드로 정렬하려면 어떻게 해야할
 ========================================================================
 
 
-여기 2개의 모델이 있습니다. :code:`Category`and :code:`Hero`.
+여기 2개의 모델이 있습니다. :code:`Category` 와 :code:`Hero`.
 
 .. code-block:: python
 
@@ -15,7 +15,7 @@ Foreign key로 연결된 모델의 필드로 정렬하려면 어떻게 해야할
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-먼저는 category별로 정렬하고 그리고 각 category 내에서 `Hero`의 name순으로 정렬하려면 이렇게 할 수 있습니다.
+먼저는 category별로 정렬하고 그리고 각 category 내에서 `Hero` 의 name순으로 정렬하려면 이렇게 할 수 있습니다.
 
 .. code-block:: python
 
@@ -23,7 +23,7 @@ Foreign key로 연결된 모델의 필드로 정렬하려면 어떻게 해야할
         'category__name', 'name'
     )
 
-:code:`'category__name'`에서 언더스코어 2개(:codeL`__`)를 유의하시기 바랍니다. 언더스코어 2개를 이용하면 관계가 있는 모델의 필드로 정렬을 할 수 있습니다.
+:code:`'category__name'` 에서 언더스코어 2개( :code:`__` )를 유의하시기 바랍니다. 언더스코어 2개를 이용하면 관계가 있는 모델의 필드로 정렬을 할 수 있습니다.
 
 이와 관련하여 아래 SQL로 나타낼 수 있습니다. 
 
