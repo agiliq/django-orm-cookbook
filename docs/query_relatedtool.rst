@@ -1,9 +1,9 @@
-How to use :code:`Q` objects for complex queries?
-==================================================
+Q 객체를 이용해 복잡한 질의를 수행하는 방법은 무엇인가요?
+====================================================================
 
-In previous chapters we used :code:`Q` objects for :code:`OR` and :code:`AND` and :code:`NOT` operations. :code:`Q` objects provides you complete control over the where clause of the query.
+앞선 몇 개의 장에서 :code:`Q` 객체를 이용해 :code:`OR` 연산, :code:`AND` 연산, :code:`NOT` 연산을 수행해 보았습니다. :code:`Q` 객체를 이용하면 SQL 질의문의 WHERE 절에 해당하는 기능을 온전히 활용할 수 있습니다.
 
-If you want to :code:`OR` your conditions.
+조건식에서 :code:`OR` 연산을 수행하려면 다음과 같이 합니다.
 
 .. code-block:: ipython
 
@@ -14,7 +14,7 @@ If you want to :code:`OR` your conditions.
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: Radha>, <User: Raghu>, <User: rishab>]>
 
-If you want to :code:`AND` your conditions.
+조건식에서 :code:`AND` 연산을 수행하려면 다음과 같이 합니다.
 
 .. code-block:: ipython
 
@@ -24,7 +24,7 @@ If you want to :code:`AND` your conditions.
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: rishab>]>
 
-If you want to find all users whose :code:`first_name` starts with 'R', but not if the :code:`last_name` has 'Z'
+:code:`first_name`이 'R'로 시작하되, :code:`last_name`에 'Z'가 포함되지 않은 사용자를 모두 구하려면 다음과 같이 조건을 작성하면 됩니다.
 
 .. code-block:: ipython
 
@@ -32,8 +32,7 @@ If you want to find all users whose :code:`first_name` starts with 'R', but not 
         Q(first_name__startswith='R') & ~Q(last_name__startswith='Z')
     )
 
-
-If you look at the generated query, you would see
+다음은 위 코드에서 장고가 생성하는 질의문입니다.
 
 .. code-block:: sql
 
@@ -52,4 +51,4 @@ If you look at the generated query, you would see
     WHERE ("auth_user"."first_name"::text LIKE R%
            AND NOT ("auth_user"."last_name"::text LIKE Z%))
 
-You can combine the Q objects in more complex ways to generate complex queries.
+Q 객체를 이용하면 이보다 더 복잡한 조건의 질의도 문제 없이 지시할 수 있습니다.
