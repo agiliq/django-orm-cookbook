@@ -16,7 +16,7 @@ OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하려�
 질의문 살펴보기
 -----------------------
 
-위 조건의 SQL 질의문은 대략 다음과 같습니다. ::
+위 조건의 SQL 질의문은 다음과 같이 생성됩니다. ::
 
     SELECT username, first_name, last_name, email FROM auth_user WHERE first_name LIKE 'R%' OR last_name LIKE 'D%';
 
