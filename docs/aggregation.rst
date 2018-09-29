@@ -1,7 +1,7 @@
-How to group records in Django ORM?
+Django ORM을 사용하여 어떻게 기록을 집계할 수 있나요?
 ========================================
 
-Grouping of records in Django ORM can be done using aggregation functions like :code:`Max`, :code:`Min`, :code:`Avg`, :code:`Sum`. Django queries help to create, retrieve, update and delete objects. But sometimes we need to get aggregated values from the objects. We can get them by example shown below ::
+:code:`Max`, :code:`Min`, :code:`Avg`, :code:`Sum` 과 같은 집계함수를 사용하면 Django ORM을 사용하여 기록을 집계할 수 있습니다. Django 쿼리를 통해 객체를 생성하고 읽고 갱신하고 삭제할 수 있지만 이 뿐 아니라 기록들을 집계해야 할 때가 있습니다. 다믕과 같은 방법을 통해 기록을 집계할 수 있습니다. ::
 
     >>> from django.db.models import Avg, Max, Min, Sum, Count
     >>> User.objects.all().aggregate(Avg('id'))
