@@ -1,9 +1,9 @@
-How to order on two fields
+어떻게 하면 2개의 필드를 기준으로 정렬할 수 있을까?
 ========================================================================
 
-:code:`order_by` on querysets can take one or more attribute names, allowing you to order on two or more fields.
+쿼리셋에서 :code:`order_by` 는 1개 내지는 그 이상의 필드로 정렬을 가능하게 해줍니다.
 
-..code-block:: ipython
+.. code-block:: ipython
 
     In [5]: from django.contrib.auth.models import User
 
