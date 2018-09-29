@@ -1,10 +1,10 @@
-필드의 값을 서로 비교하여 행을 선택하려면 어떻게 하나요?
+열의 값을 서로 비교하여 항목을 선택할 수 있나요?
 ==============================================================================
 
-장고 ORM에서 특정한 값을 기준으로 행을 선택하는 것은 간단합니다. 예를 들어, :code:`first_name`이 :code:`'R'`로 시작하는 :code:`User` 모델의 행을 구하려면
+장고 ORM에서 특정한 값을 기준으로 행을 선택하는 것은 간단합니다. 예를 들어, 이름(:code:`first_name`)이 :code:`'R'`로 시작하는 :code:`User` 모델의 행을 구하려면
 :code:`User.objects.filter(first_name__startswith='R')`와 같이 코드를 작성하면 됩니다.
 
-그런데 first_name을 last_name과 비교하여 선택하려면 어떻게 해야 할까요? 이럴 때 :code:`F` 객체를 사용합니다.
+그런데 이름(:code:`first_name`)을 성(:code:`last_name`)과 비교하여 선택하려면 어떻게 해야 할까요? 이럴 때 :code:`F` 객체를 사용합니다.
 
 실습을 위해 User 행을 몇 개 생성합시다.
 
@@ -35,5 +35,5 @@
     In [46]: User.objects.annotate(first=Substr("first_name", 1, 1), last=Substr("last_name", 1, 1)).filter(first=F("last"))
     Out[46]: <QuerySet [<User: Guido>, <User: Tim>]>
 
-:code:`F` 객체에 :code:`__gt`, :code:`__lt` 등의 식을 적용하는 것 또한 가능합니다.
+:code:`F` 객체에 :code:`__gt`, :code:`__lt` 등의 룩업(lookup)을 적용하는 것 또한 가능합니다.
 
