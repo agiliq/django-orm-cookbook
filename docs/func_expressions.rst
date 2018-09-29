@@ -35,7 +35,7 @@ PostgreSQL에는 :code:`fuzzystrmatch` 확장 기능이 있습니다. 이 확장
 
 이제 :code:`Hero.objects.annotate(like_zeus=LevenshteinLikeZeus(F("name")))`와 같이 클래스를 이용할 수 있습니다.
 
-이렇게 구한 편집 거리 유사도 필드를 기준으로 항목을 선별할 수 있습니다.
+이렇게 구한 편집 거리 유사도를 기준으로 항목을 선별할 수 있습니다.
 
 .. code-block:: ipython
 

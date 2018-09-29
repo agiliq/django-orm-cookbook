@@ -24,7 +24,7 @@ Q 객체를 이용해 복잡한 질의를 수행하는 방법은 무엇인가요
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: rishab>]>
 
-:code:`first_name`이 'R'로 시작하되, :code:`last_name`에 'Z'가 포함되지 않은 사용자를 모두 구하려면 다음과 같이 조건을 작성하면 됩니다.
+이름(:code:`first_name`)이 'R'로 시작하되, 성(:code:`last_name`)에 'Z'가 포함되지 않은 사용자를 모두 구하려면 다음과 같이 조건을 작성하면 됩니다.
 
 .. code-block:: ipython
 
@@ -32,7 +32,7 @@ Q 객체를 이용해 복잡한 질의를 수행하는 방법은 무엇인가요
         Q(first_name__startswith='R') & ~Q(last_name__startswith='Z')
     )
 
-다음은 위 코드에서 장고가 생성하는 질의문입니다.
+위 코드로 생성되는 질의문은 다음과 같습니다.
 
 .. code-block:: sql
 
