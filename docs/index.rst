@@ -2,10 +2,10 @@
 +++++++++++++++++++++++
 
 
-장고 ORM 요리책은 장고 ORM 과 장고의 모델을 사용하는 방법에 관한 책입니다.
-장고는 "MTV"(모델-템플릿-뷰) 프레임워크입니다 - 이 책은 모델 파트에 대한 내용을 자세히 다룹니다.
+『장고 ORM 요리책(Django ORM Cookbook)』은 장고의 ORM과 모델을 이용한 다양한 레시피(조리법)를 담은 책입니다. 장고는 모델-템플릿-뷰(MTV) 프레임워크입니다. 이 책에서는 그 가운데 '모델'에 대해 상세히 다룹니다.
 
-이 책은 장고 ORM/쿼리셋/모델의 사용법에 관한 50가지의 질문으로 구성되어 있습니다.
+이 책은 "장고 ORM/쿼리셋/모델으로 ~을 하는 방법은 무엇인가요?"와 같은 질문 50여 개와 그 답을 담고 있습니다.
+
 
 .. image:: BookCover.jpg
 
@@ -14,8 +14,9 @@
 
    introduction
 
-쿼리셋과 필터링
-===============================================
+
+정보를 질의하고 걸러내기
+========================
 
 .. toctree::
    :maxdepth: 1
@@ -40,8 +41,8 @@
    func_expressions
 
 
-Creating, Updating and Deleting things
-===============================================
+정보를 생성/갱신/삭제하기
+=======================
 
 .. toctree::
    :maxdepth: 1
@@ -56,7 +57,7 @@ Creating, Updating and Deleting things
    datetime
 
 
-Ordering things
+질의 결과를 정렬하기
 ========================
 
 .. toctree::
@@ -70,7 +71,7 @@ Ordering things
    order_by_annotated_field
 
 
-Database Modelling
+데이터베이스 모델 짜기
 ==============================================
 
 .. toctree::
@@ -94,7 +95,7 @@ Database Modelling
 
 
 
-Testing
+테스트하기
 ===============================================
 .. toctree::
    :maxdepth: 1
@@ -104,9 +105,12 @@ Testing
    keepdb
    refresh_from_db
 
-Indices and tables
+
+
+찾아보기 / 표
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
