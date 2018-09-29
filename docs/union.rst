@@ -1,10 +1,10 @@
-같은 모델 또는 다른 모델에서의 2개의 쿼리셋을 어떻게 합칠까(union)?
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+동일한 모델 또는 서로 다른 모델에서 구한 쿼리셋들의 합집합을 구하는 방법은 무엇인가요?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-union은 2개 이상의 쿼리셋 결과물을 합칠 때 사용됩니다.
-쿼리셋은 같거나 다른 모델에서 만들 수 있습니다. 만약 다른 모델을 통해 얻은 쿼리셋이라면, 필드와 데이터 타입을 맞춰야만 합니다.
+SQL에서는 여러 개의 결과 집합을 합할 때 UNION 연산을 이용합니다. 장고 ORM에서 union 메서드를 이용해 쿼리셋을 합할 수 있습니다. 합하려는 쿼리셋의 모델이 서로 다른 경우, 각 쿼리셋에 포함된 필드와 데이터 유형이 서로 맞아야 합니다.
 
-:code:`auth_user` 을 통해 계속 보도록 합시다. 이 모델로부터 union을 하기 위해 2개의 쿼리셋을 생성하겠습니다.
+
+:code:`auth_user` 모델에서 두 쿼리셋을 구한 뒤 합집합을 구해 봅시다.
 
 .. code-block:: python
 
@@ -19,7 +19,7 @@ union은 2개 이상의 쿼리셋 결과물을 합칠 때 사용됩니다.
     >>> q2.union(q1)
     <QuerySet [<User: yash>, <User: John>, <User: Ricky>, <User: sharukh>, <User: Ritesh>, <User: Billy>, <User: Radha>, <User: sohan>, <User: Raghu>, <User: rishab>]>
 
-자, 해봅시다.
+다음 코드는 실행하면 오류가 발생합니다.
 
 .. code-block:: python
 
@@ -30,13 +30,11 @@ union은 2개 이상의 쿼리셋 결과물을 합칠 때 사용됩니다.
     django.db.utils.OperationalError: SELECTs to the left and right of UNION do not have the same number of result columns
 
 
-union은 오직 같은 필드와 같은 데이터타입을 갖는 쿼리셋으로 실행할 수 있습니다. 그렇기 때문에 위 마지막에 error를 만나게 된 겁니다. 같은 필드 쿼리셋이면 2개 모델에서 union을 실행할 수 있습니다.
+union 메서드는 합하려는 쿼리셋의 필드와 데이터 유형이 서로 일치할 때만 실행할 수 있습니다. 그래서 마지막 명령이 실패했습니다.
 
-:code:`Hero` 와 :code:`Villain` 두 개 모델 모두 :code:`name` 과 :code:`gender` 를 가지고 있기 때문에
-우리는 2개 필드로 제한하기 위해 :code:`values_list` 를 사용한 후 union을 할 수 있습니다.
+:code:`Hero` 모델과 :code:`Villain` 모델은 둘 다 :code:`name` 필드와 :code:`gender` 필드를 갖고 있습니다. :code:`values_list`를 이용해 공통된 필드만 가져온 뒤 union을 수행할 수 있습니다.
 
-
-.. code-block:: python
+... code-block:: python
 
     Hero.objects.all().values_list(
         "name", "gender"
@@ -45,4 +43,5 @@ union은 오직 같은 필드와 같은 데이터타입을 갖는 쿼리셋으�
         "name", "gender"
     ))
 
-위 코드를 통해 :code:`Hero` 와 :code:`Villain` 모델의 name과 gender 모두를 얻게 될 것입니다.
+위 코드를 실행하면 :code:`Hero` 모델과 :code:`Villain` 모델의 이름과 성별을 함꼐 구할 수 있습니다.
+
