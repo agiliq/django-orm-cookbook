@@ -1,18 +1,17 @@
-Introduction
+개요
 -----------------
 
-Django ORM is one of the key pillars of Django. It provides abstractions to work with databases, in a mostly database agnostic way.
+장고 ORM은 장고의 핵심 구성요소 가운데 하나로, 우리가 데이터베이스 시스템을 직접 다루지 않고도 데이터베이스를 활용할 수 있도록 편리하고도 강력한 인터페이스를 제공합니다. 장고 ORM은 "간단한 것을 쉽게, 어려운 것도 할 수 있게" 해 줍니다.
 
-Django ORM combines ease of use with powerful abstractions. It keeps "Simple things easy and hard things possible".
-
-In this book, we will learn Django ORM by doing things with it. We will ask about 50 questions about Django ORM, and get a deeper understanding of the ORM.
+이 책은 여러 가지 예제로 문제 상황을 직접 다뤄보며 장고 ORM을 익히도록 합니다. 여러분의 장고 ORM의 이해도를 높여 줄 50여 개의 질문을 준비했습니다.
 
 
-How to read this book.
+이 책을 읽는 방법
 +++++++++++++++++++++++++
 
-Each chapter in the book is question. The questions are grouped in related chapters. You can read the book in eaither of two ways.
+이 책의 각 장은 각각 질문 하나를 나타냅니다. 비슷한 주제를 다루는 질문들은 서로 모아 두었습니다. 이 책을 읽는 방법은 크게 두 가지가 있습니다.
 
-1. If you are looking to get answers to specific questions, read that chapter and other chapters in that group.
-2. If you are need to get a deeper understanding of Django ORM and models layer, read the chapters from start to the end.
+1. 특정한 질문에 관한 답을 찾는다면 그 질문을 다루는 장과 그와 연결된 장을 함께 읽으세요.
+2. 장고 ORM와 모델 계층에 대한 이해도를 높이고 싶다면 책을 처음부터 차례대로 읽으세요.
+
 
