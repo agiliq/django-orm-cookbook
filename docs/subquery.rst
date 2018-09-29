@@ -1,7 +1,7 @@
 장고에서 서브쿼리 식을 사용하려면 어떻게 하나요?
 ==============================================================
 
-장고에서 SQL 서브쿼리 식을 사용할 수 있습니다. 간단한 것부터 시작해 봅시다. :code:`auth_user` 모델과 일 대 일(:code:`OneToOne`) 관계로 연결된 :code:`UserParent` 모델이 있다고 합시다. 아래 코드로 ``UserParent`` 모델에서 ``auth_user``를 가진 행을 모두 구할 수 있습니다.
+장고에서 SQL 서브쿼리 식을 사용할 수 있습니다. 간단한 것부터 시작해 봅시다. :code:`auth_user` 모델과 일 대 일(:code:`OneToOne`) 관계로 연결된 :code:`UserParent` 모델이 있다고 합시다. 아래 코드로 :code:`UserParent` 모델에서 :code:`auth_user`를 가진 행을 모두 구할 수 있습니다.
 
 .. code-block:: ipython
 
