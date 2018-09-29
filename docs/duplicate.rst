@@ -1,11 +1,9 @@
-Find rows which have duplicate field values
+중복된 필드 값 갖는 열 찾기
 ==============================================
 
 .. image:: usertable2.png
 
-Say you want all users whose :code:`first_name` matches another user.
-
-You can find duplicate records using the technique below.
+:code:`first_name` 이 일치하는 user들을 찾길 원한다고 가정해봅시다. 아래의 쿼리로 중복된 필드 값을 갖는 record들을 찾을 수 있습니다.
 
 .. code-block:: python
 
@@ -15,7 +13,7 @@ You can find duplicate records using the technique below.
     >>> duplicates
     <QuerySet [{'first_name': 'John', 'name_count': 3}]>
 
-If you need to fill all the records, you can do
+위의 쿼리에 해당하는 모든 record들의 id를 찾기위해 아래와 같은 쿼리를 쓸 수 있습니다.
 
 .. code-block:: python
 

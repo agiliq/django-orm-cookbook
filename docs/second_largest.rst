@@ -1,13 +1,12 @@
-How to find second largest record using Django ORM ?
+어떻게 두번째로 큰 record를 찾을 수 있나요?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-You would across situations when you want to find second highest user depending on their age or salary.
-
-Though the ORM gives the flexibility of finding :code:`first()`, :code:`last()` item from the queryset but not nth item. You can do it using the slice operator.
+연령이나 급여에 따라 두 번째로 높은 사용자를 찾고 싶은 경우가 있습니다.
+Django ORM은 :code:`first()` 나 :code:`last()` 와 같은 방식으로 첫번째나 마지막 항목을 찾을 수 있는 유연성을 제공하지만 n번째 항목은 찾을 수 없습니다. 그럴때 slice 연산자를 사용하면 가능합니다
 
 .. image:: usertable.png
 
-We can find Nth records from the query by using slice operator.
+slice 연산자를 사용하여 N번째 record를 찾을 수 있습니다.
 
 .. code-block:: python
 
@@ -19,7 +18,8 @@ We can find Nth records from the query by using slice operator.
     'Sohan'
 
 
-:code:`User.objects.order_by('-last_login')[2]` only pulls up the required object from db using :code:`LIMIT ... OFFSET`. If you look at the generated sql, you would see something like this.
+:code:`User.objects.order_by('-last_login')[2]` 해당 쿼리는 Database로 부터 세번째로 큰 결과만 가져오는 SQL구문을 생성합니다.
+:code:`LIMIT ... OFFSET` 쿼리로 부터 생성된 SQL구문의 LIMIT ... OFFSET 부분을 확인할 수 있습니다.
 
 
 .. code-block:: sql
