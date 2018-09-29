@@ -1,7 +1,7 @@
-What signals are raised by Django during object creation or update?
-========================================================================
+모델 인스턴스가 생성·갱신될 때 발생하는 시그널에는 어떤 것이 있나요?
+====================================================================================
 
-Django provides signals which allows hooking into a model objects creation and deletion lifecycle. The signals provided by Django are
+장고의 시그널을 이용하면 모델 인스턴스의 생명주기에 따라 특정 코드가 실행되도록 예약해 둘 수 있습니다. 장고가 제공하는 시그널의 종류는 다음과 같습니다.
 
 - :code:`pre_init`
 - :code:`post_init`
@@ -11,18 +11,18 @@ Django provides signals which allows hooking into a model objects creation and d
 - :code:`post_delete`
 
 
-Among these, the most commonly used signals are :code:`pre_save` and :code:`post_save`. We will look into them in detail.
+이 가운데 :code:`pre_save`와 :code:`post_save`가 가장 많이 사용됩니다. 이 두 시그널을 좀 더 자세히 살펴봅시다.
 
-Signals vs overriding .save
------------------------------------
+시그널과 :code:`save` 메서드 재정의 비교
+-----------------------------------------------------
 
-Since signals can be used for similar effects as overriding :code:`.save`, which one to use is a frequent source of confusion. Here is when you should use which.
+시그널을 이용하면 :code:`save` 메서드를 재정의하는 것과 비슷한 효과를 누릴 수 있습니다. 그래서 어느 것을 사용해야 할지 헷갈릴 수도 있는데요, 다음 규칙에 따르시기 바랍니다.
 
-- If you want other people, eg. third party apps, to override or customize the object :code:`save` behaviour, you should raise your own signals
-- If you are hooking into the :code:`save` behavior of an app you do not control, you should hook into the :code:`post_save` or :code:`pre_save`
-- If you are customizing the save behaviour of apps you control, you should override :code:`save`.
+- 다른 사람(외부 라이브러리 등)이 여러분 앱의 :code:`save` 메서드를 재정의·커스터마이즈하도록 허용하려면 직접 시그널을 발생시켜야 합니다.
+- 여러분이 통제할 수 없는 앱의 :code:`save` 메서드에 코드를 예약해야 한다면 :code:`post_save` 시그널 또는 :code:`pre_save` 시그널을 이용해야 합니다.
+- 여러분이 통제할 수 있는 앱의 저장 방식을 손 볼 때는 :code:`save` 메서드를 재정의해야 합니다.
 
-Lets take an example of a :code:`UserToken` model. This a class used for providing authentication and should get created whenever a :code:`User` is created.
+다음은 :code:`UserToken` 모델의 예입니다. 이 모델은 사용자 인증 정보를 제공하는 역할을 하며, :code:`User`가 생성될 때 함께 생성됩니다.
 
 .. code-block:: python
 
