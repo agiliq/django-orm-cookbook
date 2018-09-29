@@ -1,6 +1,4 @@
 어떻게 다른 테이블과 연결된 필드(외래키)를 기준으로 정렬할 수 있을까요?
-========================================================================
-
 
 :code:`Category` 와 :code:`Hero` 모델 두 개가 있습니다.
 
@@ -15,7 +13,7 @@
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-:code:`Hero` 안에 있는 :code:`Hero` 의 이름을 통해 정렬하려면 다음과 같이 할 수 있습니다.
+먼저 category별로 정렬하고 각 category 내에서 `Hero` 의 name순으로 정렬하려면 이렇게 할 수 있습니다.
 
 .. code-block:: python
 
