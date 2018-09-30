@@ -14,5 +14,5 @@
     ).filter(name_count=1)
     records = User.objects.filter(first_name__in=[item['first_name'] for item in distinct])
 
-한편, :code:`User.objects.distinct("first_name").all()`와 같은 코드는 고유한 :code:`first_name`을 가진 사용자 중 첫번째 항목을 구하는 코드입니다. 위 코드와는 실행 결과가 다릅니다.
+한편, :code:`User.objects.distinct("first_name").all()`와 같은 코드는 고유한 :code:`first_name`을 가진 사용자별로 첫번째 사용자를 구하는 코드입니다. 위 코드와는 실행 결과가 다릅니다.
 
