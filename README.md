@@ -1,5 +1,7 @@
 ### 장고 ORM 요리책
 
+(렌더링 된 문서: https://django-orm-cookbook-ko.readthedocs.io/en/latest/)
+
 
 장고 ORM 요리책은 장고를 이용한 다양한 레시피(조리법)를 담은 책입니다. `장고 ORM/쿼리셋으로 ~을 하려면 어떻게 하나요?` 하는 50여 개의 질문과 답을 담고 있습니다.
 
