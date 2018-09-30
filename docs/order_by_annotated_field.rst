@@ -1,7 +1,7 @@
-How to order on an annotated field?
-==========================================
+계산 필드를 기준으로 정렬할 수 있나요?
+==========================================================================
 
-You have two models, :code:`Category` and :code:`Hero`.
+:code:`Category` 모델과 :code:`Hero` 모델이 있습니다.
 
 .. code-block:: python
 
@@ -15,7 +15,7 @@ You have two models, :code:`Category` and :code:`Hero`.
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
-You want to get the :code:`Category`, ordered by number of :code:`Hero` in them. You can do this.
+:code:`Category` 항목들을 각 :code:`Category` 항목에 속한 :code:`Hero` 항목의 개수에 따라 정렬하고 싶다면, 다음과 같이 :code:`annotate` 메서드로 계산 필드를 준비하여 기준으로 삼을 수 있습니다.
 
 .. code-block:: python
 
@@ -24,5 +24,3 @@ You want to get the :code:`Category`, ordered by number of :code:`Hero` in them.
     ).order_by(
         "-hero_count"
     )
-
-

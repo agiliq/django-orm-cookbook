@@ -1,7 +1,7 @@
-How to perform join operations in django ORM?
-======================================================
+두 모델을 결합(JOIN)하려면 어떻게 하나요?
+========================================================
 
-A SQL Join statement is used to combine data or rows from two or more tables based on a common field between them. Join can be carried out in many ways. Some are shown below. ::
+SQL에서는 JOIN 문을 이용해 동일한 값을 가진 열을 기준으로 두 표를 결합할 수 있습니다. 결합 연산은 여러 가지 방법으로 수행할 수 있습니다. 다음은 장고에서 이를 수행하는 몇 가지 예입니다. ::
 
     >>> a1 = Article.objects.select_related('reporter') // Using select_related
     >>> a1

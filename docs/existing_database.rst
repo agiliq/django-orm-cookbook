@@ -1,12 +1,12 @@
-How to convert existing databases to Django models?
-=====================================================
+기존 데이터베이스를 장고 모델로 옮길 수 있나요?
+================================================================================
 
-Django comes with a utility called :code:`inspectdb` that can create models by introspecting an existing database. You can view the output by running this command ::
+장고에는 기존 데이터베이스를 분석하여 그에 맞는 모델을 생성해주는 :code:`inspectdb` 명령이 있습니다. 셸에서 다음 명령을 실행하여 결과를 확인할 수 있습니다. ::
 
     $ python manage.py inspectdb
 
-Befor running this you will have to configure your database in the :code:`settings.py` file. The result will be a file containing a model for each table. You may want to save that file ::
+이 명령을 실행하려면 먼저 :code:`settings.py` 파일에 분석하려는 데이터베이스의 접속 정보를 설정해 두어야 합니다. 출력 결과는 생성된 모델의 파이썬 코드입니다. 코드를 파이썬 모듈 파일로 저장하려면 다음과 같이 셸의 스트림 리디렉션 기능을 이용합니다. ::
 
     $ python manage.py inspectdb > models.py
 
-The output file will be saved to your current directory. Move that file to the correct app and you have a good starting point for further customizations.
+위 명령을 실행하면 분석된 모델이 파이썬 모듈 파일로 현재 디렉토리에 저장될 것입니다. 이 파일을 앱의 올바른 위치로 옮긴 뒤, 적절히 수정하여 사용하면 됩니다.

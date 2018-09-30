@@ -1,24 +1,22 @@
-How to order a queryset in ascending or descending order?
-=============================================================
+쿼리셋을 오름차순/내림차순으로 정렬할 수 있나요?
+======================================================================
 
-Ordering of the queryset can be achieved by :code:`order_by` method. We need to pass the field on which we need to Order (ascending/descending) the result.
-Query looks like this
+:code:`order_by` 메서드로 쿼리셋을 정렬할 수 있습니다. 기준 필드를 지정해 오름차순 혹은 내림차순으로 정렬할 수 있습니다. 다음 코드를 살펴보세요.
 
 .. code-block:: ipython
 
-    >>> User.objects.all().order_by('date_joined') # For ascending
+    >>> User.objects.all().order_by('date_joined')  # 오름차순
     <QuerySet [<User: yash>, <User: John>, <User: Ricky>, <User: sharukh>, <User: Ritesh>, <User: Billy>, <User: Radha>, <User: Raghu>, <User: rishab>, <User: johny>, <User: paul>, <User: johny1>, <User: alien>]>
-    >>> User.objects.all().order_by('-date_joined') # For descending; Not '-' sign in order_by method
+    >>> User.objects.all().order_by('-date_joined')  # 내림차순
     <QuerySet [<User: alien>, <User: johny1>, <User: paul>, <User: johny>, <User: rishab>, <User: Raghu>, <User: Radha>, <User: Billy>, <User: Ritesh>, <User: sharukh>, <User: Ricky>, <User: John>, <User: yash>]>
 
-You can pass multiple fields to :code:`order_by`
+기준 필드를 여러 개 지정할 수도 있습니다.
 
 .. code-block:: ipython
 
     User.objects.all().order_by('date_joined', '-last_login')
 
-Looking at the SQL
-
+SQL 질의문은 다음과 같습니다.
 
 .. code-block:: sql
 

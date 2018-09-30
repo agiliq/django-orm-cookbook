@@ -1,8 +1,9 @@
-How to convert string to datetime and store in database?
-============================================================
+시간 정보를 다른 양식으로 변환하여 데이터베이스에 저장하려면 어떻게 해야 하나요?
+=============================================================================================
 
-We can convert a date-string and store it in the database using django in many ways. Few of them are discussed below.
-Lets say we have a date-string as "2018-03-11" we can not directly store it to our date field, so we can use some dateparser or python library for it. ::
+장고에서 시간을 나타내는 텍스트를 다른 양식의 텍스트로 변환하여 데이터베이스에 저장하는 방법은 여러 가지가 있습니다. 몇 가지만 소개하겠습니다.
+
+"2018-03-11"이라는 시간 텍스트가 있는데, 이 양식으로는 데이터베이스에 저장할 수 없다고 가정합시다. 아래와 같이 장고의 dateparser 모듈이나 파이썬 표준 라이브러리를 이용하여 날짜 양식을 변환할 수 있습니다. ::
 
     >>> user = User.objects.get(id=1)
     >>> date_str = "2018-03-11"

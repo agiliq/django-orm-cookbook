@@ -1,9 +1,11 @@
-How to model one to one relationships?
-===============================================
+일대일 관계는 어떻게 나타내나요?
+===================================================
 
-One-to-one relationships occur when there is exactly one record in the first table that corresponds to one record in the related table.
-Here we have an example where we know that each individual can have only one Biological parents i.e., Mother and Father.
-We already have auth user model with us, we will add a new model UserParent as described below. ::
+일대일 관계란 두 표에서 각 항목이 서로 다른 표의 항목 단 하나와 연결되는 관계입니다. 우리가 쉽게 이해할 수 있는 예를 들자면, 우리들 각자는 생부와 생모를 각각 하나씩만 가질 수 있습니다.
+
+다음 예는 장고의 사용자 인증 모델에 :code:`UserParent` 모델을 일대일 관계로 연결해서 각 사용자마다 사용자의 부모를 기록할 수 있도록 합니다.
+
+.. code-block:: python
 
     from django.contrib.auth.models import User
 
@@ -16,19 +18,18 @@ We already have auth user model with us, we will add a new model UserParent as d
         father_name = models.CharField(max_length=100)
         mother_name = models.CharField(max_length=100)
 
-    >>> u1 = User.objects.get(first_name='Ritesh', last_name='Deshmukh')
-    >>> u2 = User.objects.get(first_name='Sohan', last_name='Upadhyay')
-    >>> p1 = UserParent(user=u1, father_name='Vilasrao Deshmukh', mother_name='Vaishali Deshmukh')
-    >>> p1.save()
-    >>> p1.user.first_name
-    'Ritesh'
-    >>> p2 = UserParent(user=u2, father_name='Mr R S Upadhyay', mother_name='Mrs S K Upadhyay')
-    >>> p2.save()
-    >>> p2.user.last_name
-    'Upadhyay'
+>>> u1 = User.objects.get(first_name='Ritesh', last_name='Deshmukh')
+>>> u2 = User.objects.get(first_name='Sohan', last_name='Upadhyay')
+>>> p1 = UserParent(user=u1, father_name='Vilasrao Deshmukh', mother_name='Vaishali Deshmukh')
+>>> p1.save()
+>>> p1.user.first_name
+'Ritesh'
+>>> p2 = UserParent(user=u2, father_name='Mr R S Upadhyay', mother_name='Mrs S K Upadhyay')
+>>> p2.save()
+>>> p2.user.last_name
+'Upadhyay'
 
-The on_delete method is used to tell Django what to do with model instances that depend on the model instance you delete. (e.g. a ForeignKey relationship). The on_delete=models.CASCADE tells Django to cascade the deleting effect i.e. continue deleting the dependent models as well. ::
+on_delete 메서드는 그 필드에 연결된 항목이 삭제될 때 그 항목을 가리키는 항목들을 어떻게 처리해야 할지 설정합니다. 예를 들어, :code:`on_delete=models.CASCADE` (하위 삭제)는 연결된 항목이 삭제될 때 해당 항목을 함께 삭제하도록 합니다. 따라서, 아래의 코드를 실행하면 :code:`User` 모델의 항목(u2) 뿐 아니라 :code:`UserParent`의 항목(p2)도 함께 삭제됩니다. ::
 
-    >>> u2.delete()
+>>> u2.delete()
 
-Will also delete the related record of :code:`UserParent`.

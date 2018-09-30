@@ -1,11 +1,11 @@
-Django ORM Cookbook
+장고 ORM 요리책
 +++++++++++++++++++++++
 
 
-Django ORM Cookbook is a book about doing things with Django ORM and Django models.
-Django is a “MTV” (Model-Template-View) framework – This book provides a deep dive into the :code:`M` part.
+『장고 ORM 요리책(Django ORM Cookbook)』은 장고의 ORM(객체 관계 매핑) 기능과 모델 기능을 활용하는 다양한 레시피(조리법)를 담은 책입니다. 장고는 모델-템플릿-뷰(MTV) 프레임워크입니다. 이 책은 그 가운데 '모델'에 대해 상세히 다룹니다.
 
-They take the form of about 50 questions of the form :code:`How to do X with Django ORM/Queryset/Models`.
+이 책은 "장고 ORM/쿼리셋/모델으로 ~을 하는 방법은 무엇인가요?"와 같은 질문 50여 개와 그 답을 담고 있습니다.
+
 
 .. image:: BookCover.jpg
 
@@ -14,8 +14,9 @@ They take the form of about 50 questions of the form :code:`How to do X with Dja
 
    introduction
 
-Querying and Filtering
-===============================================
+
+정보를 조회하고 필요한 항목을 선별하는 방법
+===============================================================
 
 .. toctree::
    :maxdepth: 1
@@ -40,8 +41,8 @@ Querying and Filtering
    func_expressions
 
 
-Creating, Updating and Deleting things
-===============================================
+항목을 생성·갱신·삭제하는 방법
+===================================================================
 
 .. toctree::
    :maxdepth: 1
@@ -56,8 +57,8 @@ Creating, Updating and Deleting things
    datetime
 
 
-Ordering things
-========================
+조회 결과를 정렬하는 방법
+================================================================
 
 .. toctree::
    :maxdepth: 1
@@ -70,8 +71,8 @@ Ordering things
    order_by_annotated_field
 
 
-Database Modelling
-==============================================
+모델을 정의하는 방법
+===============================================================
 
 .. toctree::
    :maxdepth: 1
@@ -94,7 +95,7 @@ Database Modelling
 
 
 
-Testing
+장고 ORM 코드를 테스트하는 방법
 ===============================================
 .. toctree::
    :maxdepth: 1
@@ -104,9 +105,12 @@ Testing
    keepdb
    refresh_from_db
 
-Indices and tables
-==================
+
+
+찾아보기 / 표
+===============================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

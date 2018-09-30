@@ -1,8 +1,7 @@
-How to create a generic model which can be related to any kind of entity? (Eg. a Category or a Comment?)
-=============================================================================================================
+분류·댓글처럼 아무 모델이나 가리킬 수 있는 범용 모델을 정의할 수 있나요?
+============================================================================================================
 
-
-You have models like this.
+다음 모델을 봐 주세요.
 
 .. code-block:: python
 
@@ -26,9 +25,7 @@ You have models like this.
         # ...
 
 
-:code:`Category` can be applied is a `generic` model. You prbably want to be able to apply categories to objects form any model class.
-You can do it like this
-
+여기서 :code:`Category` 모델은 범용 모델로 고쳐 정의할 수 있습니다. 다른 모델에도 분류를 적용하고 싶을 테니까요. 다음과 같이 수정하면 됩니다.
 
 .. code-block:: python
 
@@ -54,12 +51,9 @@ You can do it like this
         flex_category = GenericRelation(FlexCategory, related_query_name='flex_category')
         # ...
 
+수정한 코드에서는 :code:`FlexCategory` 모델에 외래 키 필드(:code:`ForeignKey`) 하나와 양의 정수 필드(:code:`PositiveIntegerField`) 하나를 정의하여 범용 외래 키 필드(:code:`GenericForeignKey`)를 사용할 수 있도록 하였습니다. 그리고 분류를 이용할 모델에 범용 관계 필드(:code:`GenericRelation`)를 추가했습니다.
 
-What did we do, we added we added a :code:`GenericForeignKey` fields on :code:`FlexCategory` using one :code:`ForeignKey` and one :code:`PositiveIntegerField`, then
-added a :code:`GenericRelation` on the models you want to categorize.
-
-
-At the database level it looks like this:
+:code:`FlexCategory` 모델의 데이터베이스 스키마는 다음과 같이 정의됩니다.
 
 .. code-block
 
@@ -71,23 +65,22 @@ At the database level it looks like this:
      content_type_id | integer               | not null
 
 
-You can categorize a :code:`Hero` like this.
-
+:code:`Hero` 모델의 항목을 분류할 때는 다음과 같이 합니다.
 
 .. code-block:: python
 
+    hero = Hero.objects.create(name='Hades')
     FlexCategory.objects.create(content_object=hero, name="mythic")
 
-And then get a :code:`Hero` categorised as 'ghost' like this
+'ghost'로 분류된 :code:`Hero` 를 구하려면 다음과 같이 조회합니다.
 
 .. code-block:: python
 
-    FlexCategory.objects.create(content_object=hero, name="ghost")
+    Hero.objects.filter(flex_category__name='ghost')
 
-This gives us this sql.
+위의 ORM 코드가 생성하는 SQL 질의문은 아래와 같습니다.
 
 .. code-block:: sql
-
 
     SELECT "entities_hero"."name"
     FROM "entities_hero"

@@ -1,8 +1,7 @@
-How to order on a field from a related model (with a foreign key)?
-========================================================================
+외래 키로 연결된 다른 표의 열을 기준으로 정렬할 수 있나요?
+==========================================================================
 
-
-You have two models, :code:`Category` and :code:`Hero`.
+:code:`Category` 모델과 :code:`Hero` 모델이 다음과 같이 외래 키(ForeignKey)로 연결되어 있습니다.
 
 .. code-block:: python
 
@@ -15,7 +14,8 @@ You have two models, :code:`Category` and :code:`Hero`.
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-You want to order :code:`Hero` by category and inside each category by the :code:`Hero` name. You can do.
+아래 코드는 :code:`Hero` 모델의 쿼리셋을 category 필드 순으로 정렬하되, category가 같은 항목은 (:code:`Hero` 의) name 필드 순으로 정렬합니다.
+
 
 .. code-block:: python
 
@@ -23,9 +23,9 @@ You want to order :code:`Hero` by category and inside each category by the :code
         'category__name', 'name'
     )
 
-Note the double underscore(:code:`__` ) in :code:`'category__name'`. Using the double undertscore, you can order on a field from a related model.
+:code:`'category__name'` 인자에 이중 밑줄 기호(:code:`__` )를 사용한 것을 봐 주세요. 이중 밑줄 기호로 연결된 모델의 필드를 가리킬 수 있습니다.
 
-If you look at the SQL.
+SQL 질의문은 다음과 같이 생성됩니다.
 
 .. code-block:: sql
 
@@ -36,3 +36,4 @@ If you look at the SQL.
     INNER JOIN "entities_category" ON ("entities_hero"."category_id" = "entities_category"."id")
     ORDER BY "entities_category"."name" ASC,
              "entities_hero"."name" ASC
+
