@@ -1,14 +1,13 @@
-어떻게 쿼리셋에서 데이터베이스의 특정한 함수를 사용할 수 있나요?
-========================================================================
+장고가 지원하지 않는 데이터베이스 함수를 사용할 수 있나요?
+==========================================================================
 
-Django에서도 :code:`Lower`, :code:`Coalesce`, :code:`Max` 와 같은 함수를 제공하지만 모든 데이터베이스의 함수를 제공하지는 않습니다. 각 데이터베이스의 특징적인 함수들은 더욱 더 그렇습니다.
+장고에는 :code:`Lower`, :code:`Coalesce`, :code:`Max` 등의 데이터베이스 함수가 포함되어 있습니다. 하지만 장고가 데이터베이스가 지원하는 모든 함수를 제공하는 것은 아닙니다. 특히, 특정 데이터베이스 시스템의 전용 함수들은 제공되지 않습니다.
 
-Django에서는 Django에서 제공하지 않는 특정한 데이터베이스 함수를 사용할 수 있게 해주는 :code:`Func` 함수를 제공합니다.
+장고가 제공하지 않는 데이터베이스 함수를 실행하기 위해서는 장고의 :code:`Func` 객체를 사용하면 됩니다.
 
+PostgreSQL에는 :code:`fuzzystrmatch` 확장 기능이 있습니다. 이 확장에는 텍스트 데이터의 유사도를 측정하기 위한 함수가 여러 가지 포함되어 있습니다. PostgreSQL 데이터베이스 셸에서 :code:`create extension fuzzystrmatch`를 실행하여 이 확장을 설치하고 아래의 실습을 진행해 주세요.
 
-Postgres는 유사성을 측정하는 몇가지 함수의 모음인 :code:`fuzzystrmatch` 가 있습니다. :code:`create extension fuzzystrmatch` 명령으로 postgres DB에 이를 설치할 수 있습니다.
-
-Postgres의 :code:`levenshtein` 함수를 사용해봅시다. 먼저 Hero 객체를 몇 개 만들어 봅시다.
+레벤슈타인 치환 거리 알고리즘을 구현한 :code:`levenshtein` 함수를 이용해 보겠습니다. 실습에 사용할 Hero 모델의 항목을 여러 개 생성합시다.
 
 .. code-block:: python
 
@@ -18,7 +17,7 @@ Postgres의 :code:`levenshtein` 함수를 사용해봅시다. 먼저 Hero 객체
     Hero.objects.create(name="Xeus", description="A greek God", benevolence_factor=80, category_id=12, origin_id=1)
     Hero.objects.create(name="Poseidon", description="A greek God", benevolence_factor=80, category_id=12, origin_id=1)
 
-이 때 이름(:code:`name`)이 Zeus와 유사한 :code:`Hero` 객체를 찾고 싶다면 다음과 같이 할 수 있습니다.
+이제 :code:`name`이 'Zeus'와 비슷한 :code:`Hero` 항목들을 구해 봅시다.
 
 .. code-block:: python
 
@@ -26,7 +25,7 @@ Postgres의 :code:`levenshtein` 함수를 사용해봅시다. 먼저 Hero 객체
     Hero.objects.annotate(like_zeus=Func(F('name'), function='levenshtein', template="%(function)s(%(expressions)s, 'Zeus')"))
 
 
-:code:`like_zeus=Func(F('name'), function='levenshtein', template="%(function)s(%expressions)s, 'Zeus')")` 는 function과 template, 두 인자를 받습니다. 만약 이 함수를 재사용하고 싶다면 다음과 같은 클래스를 정의하면 됩니다.
+:code:`like_zeus=Func(F('name'), function='levenshtein', template="%(function)s(%(expressions)s, 'Zeus')")` 코드에서 :code:`Func` 객체를 세 개의 인자로 초기화하였습니다. 첫 번째 인자는 함수에 적용할 열, 두 번째 인자는 데이터베이스에서 실행할 함수의 이름, 세 번째 인자는 함수를 실행할 SQL 질의문의 템플릿입니다. 이 함수를 여러 번 재사용할 계획이라면 다음과 같이 클래스를 확장하여 정의해 두면 편리합니다.
 
 .. code-block:: python
 
@@ -34,9 +33,9 @@ Postgres의 :code:`levenshtein` 함수를 사용해봅시다. 먼저 Hero 객체
         function='levenshtein'
         template="%(function)s(%(expressions)s, 'Zeus')"
 
-이제 이것을 :code:`Hero.objects.annotate(like_zeus=LevenshteinLikeZeus(F("name")))` 과 같이 사용하면 됩니다.
+이제 :code:`Hero.objects.annotate(like_zeus=LevenshteinLikeZeus(F("name")))`와 같이 클래스를 이용할 수 있습니다.
 
-이렇게 생성된 :code:`like_zeus` 필드를 다음과 같이 필터링할 수 있습니다.
+이렇게 구한 편집 거리 유사도를 기준으로 항목을 선별할 수 있습니다.
 
 .. code-block:: ipython
 

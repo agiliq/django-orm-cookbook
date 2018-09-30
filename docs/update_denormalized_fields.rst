@@ -1,7 +1,7 @@
-How to update denormalized fields in other models on save?
-========================================================================
+모델 인스턴스를 저장할 때, 다른 모델에 반정규화된 필드를 함께 갱신하는 방법이 있나요?
+==========================================================================================================
 
-You have models like this.
+모델을 다음과 같이 구성했다고 합시다.
 
 .. code-block:: python
 
@@ -26,9 +26,9 @@ You have models like this.
         # ...
 
 
-You need the :code:`hero_count` and :code:`villain_count`, to be updated when new objects are created.
+Hero 모델과 Villain 모델의 항목을 새로 저장할 때, Category 모델의 :code:`hero_count` 필드와 :code:`villain_count` 필드를 갱신해야 합니다.
 
-You can do something like this
+다음과 같이 Hero 모델과 Villain 모델의 :code:`save` 메서드를 재정의하면 됩니다.
 
 .. code-block:: python
 
@@ -50,9 +50,9 @@ You can do something like this
             super().save(*args, **kwargs)
 
 
-Note how we did not use :code:`self.category.hero_count += 1`, as :code:`update` will do a DB update.
+위 코드에서 :code:`self.category.hero_count += 1`과 같이 인스턴스의 값을 수정하는 것이 아니라, :code:`update` 메서드로 데이터베이스의 갱신을 수행하도록 한 것을 확인하시기 바랍니다.
 
-The alternative method is using `signals`. You can do it like this.
+또 다른 방법으로, '시그널'이라는 기능을 이용하는 방법이 있습니다. 시그널을 이용하는 예를 살펴봅시다.
 
 .. code-block:: python
 
@@ -72,12 +72,11 @@ The alternative method is using `signals`. You can do it like this.
             Category.objects.filter(pk=villain.category_id).update(villain_count=F('villain_count')+1)
 
 
-Signals vs Overriding :code:`.save`
-++++++++++++++++++++++++++++++++++++
+:code:`save` 메서드 재정의 방법과 시그널의 비교
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+:code:`save` 메서드를 재정의하는 방법과 시그널을 이용하는 방법 모두 사용할 수 있습니다. 어느 것을 사용하는 것이 좋을까요? 다음 규칙을 권해 드립니다.
 
-Since either of signals of :code:`.save` can be used for the save behviour, when should you use which one? I follow a simple rule.
-
-- If your fields depend on a model you control, override :code:`.save`
-- If your fields depend on a model from a 3rd party app, which you do no control, use signals.
+- 반정규화 필드에 영향을 끼치는 모델을 여러분이 통제할 수 있다면 `save` 메서드를 재정의합니다.
+- 반정규화 필드에 영향을 끼치는 모델을 여러분이 통제할 수 없다면(그 영향이 라이브러리 등에서 이루어진다면) 시그널을 이용합니다.
 

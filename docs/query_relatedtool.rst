@@ -1,9 +1,9 @@
-어떻게 복잡한 쿼리에 :code:`Q` 객체를 사용하나요?
-==================================================
+Q 객체를 이용해 복잡한 질의를 수행하는 방법은 무엇인가요?
+====================================================================
 
-지난 장에서 :code:`Q` 객체를 :code:`OR` 와 :code:`AND` 그리고 :code:`NOT` 연산에 사용했습니다. :code:`Q` 객체를 사용하면 어떤 쿼리의 Where절을 쉽게 나타낼 수 있습니다.
+앞선 몇 개의 장에서 :code:`Q` 객체를 이용해 :code:`OR` 연산, :code:`AND` 연산, :code:`NOT` 연산을 수행해 보았습니다. :code:`Q` 객체를 이용하면 SQL 질의문의 WHERE 절에 해당하는 기능을 온전히 활용할 수 있습니다.
 
-만약 :code:`OR` 연산을 하고 싶다면,
+조건식에서 :code:`OR` 연산을 수행하려면 다음과 같이 합니다.
 
 .. code-block:: ipython
 
@@ -14,7 +14,7 @@
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: Radha>, <User: Raghu>, <User: rishab>]>
 
-만약 :code:`AND` 연산을 하고 싶다면,
+조건식에서 :code:`AND` 연산을 수행하려면 다음과 같이 합니다.
 
 .. code-block:: ipython
 
@@ -24,7 +24,7 @@
     >>> queryset
     <QuerySet [<User: Ricky>, <User: Ritesh>, <User: rishab>]>
 
-만약 이름(:code:`first_name`)이 'R'로 시작하면서 성(:code:`last_name`)은 'Z'로 시작하지 않는 모든 유저를 찾고 싶다면
+이름(:code:`first_name`)이 'R'로 시작하되, 성(:code:`last_name`)에 'Z'가 포함되지 않은 사용자를 모두 구하려면 다음과 같이 조건을 작성하면 됩니다.
 
 .. code-block:: ipython
 
@@ -32,8 +32,7 @@
         Q(first_name__startswith='R') & ~Q(last_name__startswith='Z')
     )
 
-
-이때 생성된 쿼리는 다음과 같습니다.
+위 코드로 생성되는 질의문은 다음과 같습니다.
 
 .. code-block:: sql
 
@@ -52,4 +51,4 @@
     WHERE ("auth_user"."first_name"::text LIKE R%
            AND NOT ("auth_user"."last_name"::text LIKE Z%))
 
-더 복잡한 형태의 쿼리들도 Q객체들을 조합하여 얼마든지 나타낼 수 있습니다.
+Q 객체를 이용하면 이보다 더 복잡한 조건의 질의도 문제 없이 지시할 수 있습니다.

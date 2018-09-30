@@ -1,18 +1,17 @@
-### Django ORM cookbook
+### 장고 ORM 요리책
 
 
-Django ORM cookbook is a set of recipes of how to do things with Django.
-They take the form of about 50 questions of the form
-`How to do X with Django ORM/Queryset`.
+장고 ORM 요리책은 장고를 이용한 다양한 레시피(조리법)를 담은 책입니다. `장고 ORM/쿼리셋으로 ~을 하려면 어떻게 하나요?` 하는 50여 개의 질문과 답을 담고 있습니다.
 
-We have a set of models which we use across the book for answering these questions.
-
-### The models
-
-You plan to write a set of models and an assoicated admin for UMSRA researchers. You come up with two apps `entities` and `events`. The models are
+이 책에서는 전체 주제 공통으로 아래에서 설명하는 데이터 모델을 이용합니다.
 
 
-#### Events
+### 실습용 모델 준비
+
+여러분은 장고를 이용하여 UMSRA의 연구원들이 사용할 모델과 관리자 뷰(admin)를 제작하는 중입니다. 여러분은 프로젝트를 개체를 나타내는 `entities` 앱과 사건을 나타내는 `events` 앱 두 개로 나누어 작성하게 되었습니다. 그리고 각 앱의 모델을 다음과 같이 준비했습니다. (지금 자세히 보지 않아도 됩니다. 책을 보다가 필요할 때 참고해주세요.)
+
+
+#### Events 앱의 모델
 
 
     from django.db import models
@@ -86,7 +85,7 @@ You plan to write a set of models and an assoicated admin for UMSRA researchers.
             return self.a
 
 
-#### Entities
+#### Entities 앱의 모델
 
     from django.db import models
 

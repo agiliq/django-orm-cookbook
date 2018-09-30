@@ -1,10 +1,9 @@
-How to find the query associated with a queryset?
-++++++++++++++++++++++++++++++++++++++++++++++++++
+장고 ORM이 실행하는 실제 SQL 질의문을 확인할 수 있나요?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Sometime you want to know how a Django ORM makes our queries execute or what is the corresponding SQL of the code you are writing. This is very strightforward. Youn can get :code:`str` of any :code:`queryset.query` to get the sql.
+장고 ORM이 실행하는 질의문 또는 우리가 작성한 코드에 대응하는 SQL 질의문이 무엇인지 확인하고 싶을 때가 있습니다. SQL 질의문을 구하고 싶은 :code:`queryset.query`의 :code:`str`을 확인하면 됩니다. 간단하죠?
 
-You have a model called :code:`Event`. For getting all records, you will write something like
-:code:`Event.objects.all()`, then do :code:`str(queryset.query)`
+:code:`Event`라는 모델이 있을 때, 이 모델의 모든 행을 데이터베이스에서 읽어오려면 :code:`Event.objects.all()`과 같은 코드를 작성하면 됩니다. 이렇게 구한 쿼리셋의 :code:`str(queryset.query)`를 확인하여 SQL 질의문을 살펴봅시다.
 
 .. code-block:: python
 
@@ -16,7 +15,7 @@ You have a model called :code:`Event`. For getting all records, you will write s
 
 .. image:: sql_query.png
 
-Example 2
+두 번째 예제
 
 .. code-block:: python
 

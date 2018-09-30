@@ -1,11 +1,12 @@
-필드 값 비교를 기준으로 쿼리셋 필터링 하기
+열의 값을 서로 비교하여 항목을 선택할 수 있나요?
 ==============================================================================
 
-Django ORM은 고정된 값으로 필터링하는 것을 도와줍니다.
-:code:`first_name` 이 :code:`'R'` 로 시작하는 :code:`User` Object를 얻기 위해 
-:code:`User.objects.filter(first_name__startswith='R')` 를 쓸 수 있습니다.
-만약 first_name과 last_name을 비교하고 싶다면 :code:`F` obejct를 쓸 수 있습니다.
-먼저 user를 만들어보겠습니다.
+장고 ORM에서 특정한 값을 기준으로 행을 선택하는 것은 간단합니다. 예를 들어, 이름(:code:`first_name`)이 :code:`'R'`로 시작하는 :code:`User` 모델의 행을 구하려면
+:code:`User.objects.filter(first_name__startswith='R')`와 같이 코드를 작성하면 됩니다.
+
+그런데 이름(:code:`first_name`)을 성(:code:`last_name`)과 비교하여 선택하려면 어떻게 해야 할까요? 이럴 때 :code:`F` 객체를 사용합니다.
+
+실습을 위해 User 행을 몇 개 생성합시다.
 
 
 .. code-block:: ipython
@@ -16,7 +17,7 @@ Django ORM은 고정된 값으로 필터링하는 것을 도와줍니다.
     In [28]: User.objects.create_user(email="guido@example.com", username="Guido", first_name="Guido", last_name="Guido")
     Out[28]: <User: Guido>
 
-이제 fisrt_name과 last_name이 같은 유저를 찾을 수 있습니다.
+실습 데이터가 준비되었으면, 다음 코드로 이름과 성이 동일한 사용자를 구해 봅시다.
 
 
 .. code-block:: ipython
@@ -24,8 +25,7 @@ Django ORM은 고정된 값으로 필터링하는 것을 도와줍니다.
     In [29]: User.objects.filter(last_name=F("first_name"))
     Out[29]: <QuerySet [<User: Guido>]>
 
-:code:`F` object는 annotate를 사용하여 계산된 필드에서도 사용할 수 있습니다.
-만약 first_name과 last_name의 첫글자가 같은 유저를 찾길 원한다면 :code:`Substr("first_name", 1, 1)` 를 사용할 수 있습니다.
+:code:`F` 객체는 annotate 메서드로 계산해 둔 필드를 가리킬 때도 사용할 수 있습니다. 예를 들어, 이름의 첫 글자와 성의 첫 글자가 동일한 사용자를 구하고 싶다면  :code:`Substr("first_name", 1, 1)`를 사용할 수 있습니다.
 
 .. code-block:: ipython
 
@@ -35,5 +35,5 @@ Django ORM은 고정된 값으로 필터링하는 것을 도와줍니다.
     In [46]: User.objects.annotate(first=Substr("first_name", 1, 1), last=Substr("last_name", 1, 1)).filter(first=F("last"))
     Out[46]: <QuerySet [<User: Guido>, <User: Tim>]>
 
-또한 :code:`F` object는 :code:`__gt`, :code:`__lt` 나 다른 expression과 함께 사용 가능합니다.
+:code:`F` 객체에 :code:`__gt`, :code:`__lt` 등의 룩업(lookup)을 적용하는 것 또한 가능합니다.
 

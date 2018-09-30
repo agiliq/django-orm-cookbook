@@ -1,28 +1,28 @@
-How to do a NOT query in Django queryset?
+NOT 연산으로 조건을 부정하려면 어떻게 하나요?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. image:: usertable.png
 
-If you are using :code:`django.contrib.auth`, you will have a table called :code:`auth_user`. It will have fields as :code:`username`, :code:`first_name`, :code:`last_name` and more.
+장고의 사용자 계정 관리 앱인 :code:`django.contrib.auth`를 사용하면 데이터베이스에 :code:`auth_user`이라는 표가 생성됩니다. 이 표에는 :code:`username`, :code:`first_name`, :code:`last_name` 등의 열이 있습니다.
 
-Say you want to fetch all users with id NOT < 5. You need a NOT operation.
+id < 5 라는 조건을 만족하지 않는 모든 사용자를 구해 봅시다. 이를 수행하려면 NOT 연산이 필요합니다.
 
-Django provides two options.
+장고에서는 다음 두 방법으로 구할 수 있습니다.
 
 - :code:`exclude(<condition>)`
 - :code:`filter(~Q(<condition>))`
 
-The query in detail
+
+질의문 살펴보기
 -----------------------
 
-
-Our SQL query for the above condition will look something like ::
+위 조건의 SQL 질의문은 다음과 같이 생성됩니다. ::
 
     SELECT id, username, first_name, last_name, email FROM auth_user WHERE NOT id < 5;
 
 .. image:: sqluser_notquery.png
 
-Method 1 using exclude
+exclude 메서드를 이용하는 방법은 다음과 같습니다.
 
 .. code-block
 
@@ -32,7 +32,7 @@ Method 1 using exclude
     >>> queryset
     <QuerySet [<User: Ritesh>, <User: Billy>, <User: Radha>, <User: sohan>, <User: Raghu>, <User: rishab>]>
 
-Method 2 using Q() method ::
+Q 객체를 이용하는 방법은 다음과 같습니다. ::
 
     >>> from django.db.models import Q
     >>> queryset = User.objects.filter(~Q(id__lt=5))

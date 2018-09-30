@@ -1,8 +1,7 @@
-How to do a subquery expression in Django?
-=============================================
+장고에서 서브쿼리 식을 사용할 수 있나요?
+==============================================================
 
-Django allows using SQL subqueries.
-Let's start with something simple, We have a :code:`UserParent` model which has :code:`OnetoOne` relation with auth user. We will find all the :code:`UserParent` which have a :code:`UserParent`.
+장고에서 SQL 서브쿼리(subquery, 질의문 내의 하위 질의) 식을 사용할 수 있습니다. 간단한 것부터 시작해 봅시다. :code:`auth_user` 모델과 일 대 일(:code:`OneToOne`) 관계로 연결된 :code:`UserParent` 모델이 있다고 합시다. 아래 코드로 :code:`UserParent` 모델에서 :code:`auth_user`를 가진 행을 모두 구할 수 있습니다.
 
 .. code-block:: ipython
 
@@ -11,9 +10,9 @@ Let's start with something simple, We have a :code:`UserParent` model which has 
     >>> UserParent.objects.filter(user_id__in=Subquery(users.values('id')))
     <QuerySet [<UserParent: UserParent object (2)>, <UserParent: UserParent object (5)>, <UserParent: UserParent object (8)>]>
 
-Now for something more complex. For each :code:`Category`, we want to find the most benevolent :code:`Hero`.
+조금 더 까다로운 예제를 살펴봅시다. :code:`Category` 모델의 각 행 별로, 가장 선한 :code:`Hero` 행을 구해 봅시다.
 
-The models look something like this.
+모델은 다음과 같이 준비합니다.
 
 .. code-block:: python
 
@@ -32,7 +31,7 @@ The models look something like this.
         )
 
 
-You can find the most benevolent Hero like this
+이 모델에서 가장 선한 영웅을 구하려면 다음 코드를 실행합니다.
 
 .. code-block:: python
 
@@ -45,7 +44,7 @@ You can find the most benevolent Hero like this
         )
     )
 
-If you look at the generated sql, you will see
+이 코드가 실행하는 SQL 질의문은 다음과 같습니다.
 
 .. code-block:: sql
 
@@ -60,7 +59,7 @@ If you look at the generated sql, you will see
     FROM "entities_category"
 
 
-Let's break down the queryset logic. The first part is
+질의문을 한 단계씩 나누어 살펴봅시다. 다음 코드가 첫 번쨰 단계입니다.
 
 .. code-block:: python
 
@@ -68,9 +67,8 @@ Let's break down the queryset logic. The first part is
         category=OuterRef("pk")
     ).order_by("-benevolence_factor")
 
-We are ordering the :code:`Hero` object by :code:`benevolence_factor` in DESC order, and using
-:code:`category=OuterRef("pk")` to declare that we will be using it in a subquery.
+:code:`Hero`의 행들을 선함(:code:`benevolence_factor`)에 따라 내림차순(DESC)으로 정렬하여 선택합니다. 그리고 :code:`category=OuterRef("pk")`를 이용해 이 선택이 서브쿼리로 사용될 수 있도록 준비합니다.
 
-Then we annotate with :code:`most_benevolent_hero=Subquery(hero_qs.values('name')[:1])`, to get use the subquery with a :code:`Category` queryset. The :code:`hero_qs.values('name')[:1]` part picks up the first name from subquery.
 
+그 뒤 :code:`most_benevolent_hero=Subquery(hero_qs.values('name')[:1])`로 서브쿼리에 별칭을 붙여 :code:`Category` 쿼리셋 안에서 사용합니다. 이 때, :code:`hero_qs.values('name')[:1]`는 서브쿼리에서 첫 번째 행의 name 필드를 구하는 코드입니다.
 
