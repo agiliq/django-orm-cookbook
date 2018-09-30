@@ -41,4 +41,4 @@ ValueError: save() prohibited to prevent data loss due to unsaved related object
 >>> Article.objects.filter(reporter=u1)
 <QuerySet [<Article: This is a test>, <Article: This is a test>]>
 
-위 코드에서 구한 쿼리셋을 보면, u1 하나에 여러 개의 :code:`Article`이 연결되어 있음(일대다 관계)을 확인할 수 있습니다.
+위 코드에서 구한 쿼리셋을 보면, u1 하나에 여러 개의 :code:`Article` 이 연결되어 있음(일대다 관계)을 확인할 수 있습니다.

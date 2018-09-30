@@ -19,7 +19,7 @@
     'Sohan'
 
 
-:code:`User.objects.order_by('-last_login')[2]`와 같이 쿼리셋에 인덱스 연산을 지시할 때, 장고 ORM은 데이터베이스에서 전체 데이터를 가져온 뒤 인덱싱하는 것이 아니라, :code:`LIMIT ... OFFSET` SQL 구문을 이용해 필요한 데이터만 읽어 옵니다. 실제로 생성되는 SQL 질의문을 살펴봅시다.
+:code:`User.objects.order_by('-last_login')[2]` 와 같이 쿼리셋에 인덱스 연산을 지시할 때, 장고 ORM은 데이터베이스에서 전체 데이터를 가져온 뒤 인덱싱하는 것이 아니라, :code:`LIMIT ... OFFSET` SQL 구문을 이용해 필요한 데이터만 읽어 옵니다. 실제로 생성되는 SQL 질의문을 살펴봅시다.
 
 .. code-block:: sql
 

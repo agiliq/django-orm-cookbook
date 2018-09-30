@@ -1,7 +1,7 @@
 장고에서 서브쿼리 식을 사용할 수 있나요?
 ==============================================================
 
-장고에서 SQL 서브쿼리(subquery, 질의문 내의 하위 질의) 식을 사용할 수 있습니다. 간단한 것부터 시작해 봅시다. :code:`auth_user` 모델과 일 대 일(:code:`OneToOne`) 관계로 연결된 :code:`UserParent` 모델이 있다고 합시다. 아래 코드로 :code:`UserParent` 모델에서 :code:`auth_user`를 가진 행을 모두 구할 수 있습니다.
+장고에서 SQL 서브쿼리(subquery, 질의문 내의 하위 질의) 식을 사용할 수 있습니다. 간단한 것부터 시작해 봅시다. :code:`auth_user` 모델과 일 대 일(:code:`OneToOne`) 관계로 연결된 :code:`UserParent` 모델이 있다고 합시다. 아래 코드로 :code:`UserParent` 모델에서 :code:`auth_user` 를 가진 행을 모두 구할 수 있습니다.
 
 .. code-block:: ipython
 
@@ -67,8 +67,8 @@
         category=OuterRef("pk")
     ).order_by("-benevolence_factor")
 
-:code:`Hero`의 행들을 선함(:code:`benevolence_factor`)에 따라 내림차순(DESC)으로 정렬하여 선택합니다. 그리고 :code:`category=OuterRef("pk")`를 이용해 이 선택이 서브쿼리로 사용될 수 있도록 준비합니다.
+:code:`Hero` 모델의 항목들을 선함(:code:`benevolence_factor`)에 따라 내림차순으로 정렬하여 선택합니다. 그리고 :code:`category=OuterRef("pk")` 를 이용해 이 선택이 서브쿼리로 사용될 수 있도록 준비합니다.
 
 
-그 뒤 :code:`most_benevolent_hero=Subquery(hero_qs.values('name')[:1])`로 서브쿼리에 별칭을 붙여 :code:`Category` 쿼리셋 안에서 사용합니다. 이 때, :code:`hero_qs.values('name')[:1]`는 서브쿼리에서 첫 번째 행의 name 필드를 구하는 코드입니다.
+그 뒤 :code:`most_benevolent_hero=Subquery(hero_qs.values('name')[:1])` 로 서브쿼리에 별칭을 붙여 :code:`Category` 쿼리셋 안에서 사용합니다. 이 때, :code:`hero_qs.values('name')[:1]` 는 서브쿼리에서 첫 번째 행의 name 필드를 구하는 코드입니다.
 

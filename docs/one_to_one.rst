@@ -29,8 +29,7 @@
 >>> p2.user.last_name
 'Upadhyay'
 
-on_delete 메서드는 그 필드에 연결된 항목이 삭제될 때 그 항목을 가리키는 항목들을 어떻게 처리해야 할지 설정합니다. 예를 들어, :code:`on_delete=models.CASCADE`(하위 삭제)는 연결된 항목이 삭제될 때 해당 항목을 함께 삭제하도록 합니다. 따라서, 다음 코드를 실행하면
+on_delete 메서드는 그 필드에 연결된 항목이 삭제될 때 그 항목을 가리키는 항목들을 어떻게 처리해야 할지 설정합니다. 예를 들어, :code:`on_delete=models.CASCADE` (하위 삭제)는 연결된 항목이 삭제될 때 해당 항목을 함께 삭제하도록 합니다. 따라서, 아래의 코드를 실행하면 :code:`User` 모델의 항목(u2) 뿐 아니라 :code:`UserParent`의 항목(p2)도 함께 삭제됩니다. ::
 
 >>> u2.delete()
 
-:code:`User` 모델의 항목(u2) 뿐 아니라 :code:`UserParent`의 항목(p2)도 함께 삭제됩니다.

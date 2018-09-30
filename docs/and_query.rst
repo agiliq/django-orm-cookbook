@@ -3,7 +3,7 @@ AND 연산으로 여러 조건을 모두 만족하는 항목을 구하려면 어
 
 .. image:: usertable.png
 
-장고의 사용자 계정 관리 앱인 :code:`django.contrib.auth`를 사용하면 데이터베이스에 :code:`auth_user`이라는 표가 생성됩니다. 이 표에는 :code:`username`, :code:`first_name`, :code:`last_name` 등의 열이 있습니다.
+장고의 사용자 계정 관리 앱인 :code:`django.contrib.auth` 를 사용하면 데이터베이스에 :code:`auth_user` 라는 표가 생성됩니다. 이 표에는 :code:`username`, :code:`first_name`, :code:`last_name` 등의 열이 있습니다.
 
 :code:`AND` 연산으로 여러 조건을 모두 만족하는 행을 구해야 하는 경우가 많습니다. 이름이 'R'로 시작하고 성이 'D'로 시작하는 모든 사용자를 구한다고 해 봅시다.
 
@@ -18,8 +18,6 @@ AND 연산으로 여러 조건을 모두 만족하는 항목을 구하려면 어
 -----------------------
 
 위 조건의 SQL 질의문은 다음과 같이 생성됩니다. ::
-
-.. code-block:: sql
 
     SELECT username, first_name, last_name, email FROM auth_user WHERE first_name LIKE 'R%' AND last_name LIKE 'D%';
 
