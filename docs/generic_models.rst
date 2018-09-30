@@ -1,7 +1,7 @@
-어떤 종류의 객체와도 연관 지을 수 있는 Generic 모델을 만드는 방법은? (예: 카테고리 또는 코멘트)
-=============================================================================================================
+분류·댓글처럼 아무 모델에서나 참조할 수 있는 범용 모델을 정의할 수 있나요?
+============================================================================================================
 
-다음과 같은 모델이 있습니다.
+다음 모델을 봐 주세요.
 
 .. code-block:: python
 
@@ -25,9 +25,7 @@
         # ...
 
 
-| ``Category`` 는 일반적인 모델입니다. 당신은 아마도 여러 모델 클래스 오브젝트에 카테고리를 적용하고 싶을 것입니다.
-| 그렇다면 다음과 같이 할 수 있습니다.
-
+여기서 :code:`Category` 모델은 범용 모델로 고쳐 정의할 수 있습니다. 다른 모델에도 분류를 적용하고 싶을 테니까요. 다음과 같이 수정하면 됩니다.
 
 .. code-block:: python
 
@@ -53,35 +51,34 @@
         flex_category = GenericRelation(FlexCategory, related_query_name='flex_category')
         # ...
 
-| ``FlexCategory`` 에 ``ForeignKey`` 와 ``PositiveIntegerField`` 를 사용하여 ``GenericForeignKey`` 필드를 적용했습니다.
-| 그리고 카테고리를 적용하려는 모델에 ``GenericRelation`` 을 추가했습니다.
-|
-| 데이터베이스 레벨에서 보면 다음과 같습니다.
+수정한 코드에서는 :code:`FlexCategory` 모델에 외래 키 필드(:code:`ForeignKey`) 하나와 양의 정수 필드(:code:`PositiveIntegerField`) 하나를 정의하여 범용 외래 키 필드(:code:`GenericForeignKey`)를 사용할 수 있도록 하였습니다. 그리고 분류를 이용할 모델에 범용 관계 필드(:code:`GenericRelation`)를 추가했습니다.
+
+:code:`FlexCategory` 모델의 데이터베이스 스키마는 다음과 같이 정의됩니다.
+
+.. code-block
+
+         Column      |         Type          |                             Modifiers
+    -----------------+-----------------------+--------------------------------------------------------------------
+     id              | integer               | not null default nextval('entities_flexcategory_id_seq'::regclass)
+     name            | character varying(50) | not null
+     object_id       | integer               | not null
+     content_type_id | integer               | not null
 
 
-================== ======================= ====================================================================
- Column             Type                    Modifiers
-================== ======================= ====================================================================
- id                 integer                 not null default nextval('entities_flexcategory_id_seq'::regclass)
- name               character varying(50)   not null
- object_id          integer                 not null
- content_type_id    integer                 not null
-================== ======================= ====================================================================
-
-``Hero`` 는 다음과 같이 카테고리를 생성할 수 있습니다.
+:code:`Hero` 모델의 항목을 분류할 때는 다음과 같이 합니다.
 
 .. code-block:: python
 
     hero = Hero.objects.create(name='Hades')
     FlexCategory.objects.create(content_object=hero, name="mythic")
 
-'ghost'로 분류된 ``Hero`` 는 다음과 같이 얻을 수 있습니다.
+'ghost'로 분류된 :code:`Hero`를 구하려면 다음과 같이 조회합니다.
 
 .. code-block:: python
 
     Hero.objects.filter(flex_category__name='ghost')
 
-위의 쿼리는 다음과 같은 sql을 만듭니다.
+위의 ORM 코드가 생성하는 SQL 질의문은 아래와 같습니다.
 
 .. code-block:: sql
 
