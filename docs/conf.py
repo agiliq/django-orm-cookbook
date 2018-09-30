@@ -140,8 +140,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'DjangoORMCookbook.tex', 'Django ORM Cookbook Documentation',
-     'Agiliq', 'manual'),
+    (master_doc, 'DjangoORMCookbook.tex', '장고 ORM 요리책',
+     'Agiliq/8퍼센트', 'manual'),
 ]
 
 
