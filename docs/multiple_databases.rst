@@ -26,7 +26,7 @@
         }
     }
 
-여러 개의 데이터베이스를 함께 사용하려면 데이터베이스 중계기(database router)에 대해 알아야 합니다. 장고의 기본 중계 설정은 데이터베이스를 특정하지 않은 경우 기본 데이터베이스(default database)로 중계하는 것입니다. :code:`DATABASE_ROUTERS` 설정의 기본값은 :code:`[]` 입니다. 중계기는 다음과 같이 정의할 수 있습니다. ::
+여러 개의 데이터베이스를 함께 사용하려면 데이터베이스 중계기(database router)에 대해 알아야 합니다. 장고의 기본 중계 설정은 데이터베이스를 특정하지 않은 경우 기본(default) 데이터베이스로 중계하는 것입니다. :code:`DATABASE_ROUTERS` 설정의 기본값은 :code:`[]` 입니다. 중계기는 다음과 같이 정의할 수 있습니다. ::
 
     class DemoRouter:
         """
@@ -66,7 +66,7 @@
             return None
 
 
-위와 같은 중계기가 설정되었을 때, 서로 다른 데이터베이스를 사용하는 모델은 다음과 같이 정의할 수 있습니다. ::
+중계기를 위와 같이 설정해 두었으면, 모델이 서로 다른 데이터베이스를 사용하도록 다음과 같이 정의할 수 있습니다. ::
 
     class User(models.Model):
         username = models.Charfield(ax_length=100)
@@ -80,6 +80,6 @@
             class Meta:
             app_label = 'customer_data'
 
-여러 개의 데이터베이스를 관리할 때 사용하는 마이그레이션 명령입니다. ::
+여러 개의 데이터베이스를 관리할 때 사용하는 마이그레이션 명령도 알아두세요. ::
 
         $ ./manage.py migrate --database=users_db

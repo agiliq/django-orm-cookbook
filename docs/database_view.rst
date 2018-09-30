@@ -3,7 +3,7 @@
 
 데이터베이스 뷰는 데이터베이스 내에서 조회할 수 있도록 질의문으로 정의된 객체입니다. 뷰가 데이터를 물리적으로 저장하는 것은 아니지만, 실제 표와 같이 조회할 수 있기 때문에 '가상 표'라고 불리기도 합니다. 뷰는 여러 표를 결합(JOIN)한 정보를 보여줄 수도 있고, 한 표의 부분 집합만을 보여줄 수도 있습니다. 이를 활용하면 복잡한 질의문을 감추고 필요한 정보를 쉽게 조회하는 인터페이스를 만들 수 있습니다.
 
-다음 스크린샷은 데이터베이스를 SQLiteStudio로 열어 본 모습입니다. 표가 26개 있고, 뷰는 없습니다.
+다음 스크린샷은 데이터베이스를 SQLiteStudio라는 프로그램으로 열어 본 모습입니다. 표가 26개 있고, 뷰는 없습니다.
 
 .. image:: before_view.png
 
@@ -19,7 +19,7 @@ SQL 질의문을 실행하여 간단한 뷰를 생성하겠습니다.
 
 .. image:: after_view.png
 
-장고 앱에서는 모델을 정의할 때 메타(:code:`Meta`) 클래스에 :code:`managed = False`, :code:`db_table="temp_user"`와 같이 옵션을 설정하여 뷰를 가리키는 모델로 사용할 수 있습니다. ::
+장고 앱에서는 모델을 정의할 때 메타(:code:`Meta`) 클래스에 :code:`managed = False`, :code:`db_table="temp_user"` 와 같이 옵션을 설정하여 뷰를 가리키는 모델로 사용할 수 있습니다. ::
 
     class TempUser(models.Model):
         first_name = models.CharField(max_length=100)

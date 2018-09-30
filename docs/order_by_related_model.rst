@@ -14,7 +14,7 @@
         name = models.CharField(max_length=100)
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-아래 코드는 :code:`Hero` 모델의 쿼리셋을 category 필드 순으로 정렬하되, category가 같은 항목은 (:code:`Hero`의) name 필드 순으로 정렬합니다.
+아래 코드는 :code:`Hero` 모델의 쿼리셋을 category 필드 순으로 정렬하되, category가 같은 항목은 (:code:`Hero` 의) name 필드 순으로 정렬합니다.
 
 
 .. code-block:: python

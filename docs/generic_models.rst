@@ -72,7 +72,7 @@
     hero = Hero.objects.create(name='Hades')
     FlexCategory.objects.create(content_object=hero, name="mythic")
 
-'ghost'로 분류된 :code:`Hero`를 구하려면 다음과 같이 조회합니다.
+'ghost'로 분류된 :code:`Hero` 를 구하려면 다음과 같이 조회합니다.
 
 .. code-block:: python
 
