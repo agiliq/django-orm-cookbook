@@ -86,5 +86,5 @@
     In [15]: timeit.timeit(get_random, number=100)
     Out[15]: 56.92513192095794
 
-:code:`get_random3`이 :code:`get_random`보다 283배 빠르게 실행되었습니다. 단, :code:`get_random`은 언제나 이용할 수 있는 반면에, :code:`get_random3`의 방법은 장고의 기본 ID 생성 방식(자동 증가 정수 방식)을 재정의한 경우나 삭제된 항목이 너무 많을 때에는 사용하기가 어려울 수 있습니다.
+:code:`get_random3`이 :code:`get_random`보다 283배 빠르게 실행되었습니다. 단, :code:`get_random`은 언제나 이용할 수 있는 반면에, :code:`get_random3`의 방법은 장고의 기본 ID 생성 방식(auto increment, 자동 증가)을 재정의한 경우나 삭제된 항목이 너무 많을 때에는 사용하기가 어려울 수 있습니다.
 
