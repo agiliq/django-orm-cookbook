@@ -134,14 +134,15 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
+    'extraclassoptions': 'openany,oneside'
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'DjangoORMCookbook.tex', 'Django ORM Cookbook Documentation',
-     'Agiliq', 'manual'),
+    (master_doc, 'DjangoORMCookbook.tex', '장고 ORM 요리책',
+     'Agiliq/8퍼센트', 'manual'),
 ]
 
 
