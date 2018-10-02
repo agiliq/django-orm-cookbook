@@ -21,6 +21,7 @@ from entities.models import Hero, Villain
 from django.contrib.auth.models import User
 import uuid
 
+
 class Epic(models.Model):
     name = models.CharField(max_length=255)
     participating_heroes = models.ManyToManyField(Hero)
