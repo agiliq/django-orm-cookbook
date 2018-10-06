@@ -10,7 +10,7 @@ OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하려�
 장고에서는 다음 두 방법으로 구할 수 있습니다.
 
 - :code:`queryset_1 | queryset_2`
-- :code:`filter(Q(<condition_1>)|Q(<condition_2>)`
+- :code:`filter(Q(<condition_1>)|Q(<condition_2>))`
 
 
 질의문 살펴보기
