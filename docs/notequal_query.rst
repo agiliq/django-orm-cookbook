@@ -22,11 +22,7 @@ id < 5 라는 조건을 만족하지 않는 모든 사용자를 구해 봅시다
 
 .. image:: sqluser_notquery.png
 
-exclude 메서드를 이용하는 방법은 다음과 같습니다.
-
-.. code-block
-
-
+exclude 메서드를 이용하는 방법은 다음과 같습니다. ::
 
     >>> queryset = User.objects.exclude(id__lt=5)
     >>> queryset
