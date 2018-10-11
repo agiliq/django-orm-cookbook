@@ -11,7 +11,7 @@ In this book, we will learn Django ORM by doing things with it. We will ask abou
 How to read this book.
 +++++++++++++++++++++++++
 
-Each chapter in the book is question. The questions are grouped in related chapters. You can read the book in eaither of two ways.
+Each chapter in the book is question. The questions are grouped in related chapters. You can read the book in either of two ways.
 
 1. If you are looking to get answers to specific questions, read that chapter and other chapters in that group.
 2. If you are need to get a deeper understanding of Django ORM and models layer, read the chapters from start to the end.
