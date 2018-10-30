@@ -1,4 +1,4 @@
-How to use a UUID instead of ID as prmary key?
+How to use a UUID instead of ID as primary key?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Whenever we create any new model, there is an ID field attached to it. The ID field's data type will be Integer by default.
