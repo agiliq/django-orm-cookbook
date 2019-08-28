@@ -26,7 +26,7 @@ You have models like this.
         # ...
 
 
-:code:`Category` can be applied is a `generic` model. You prbably want to be able to apply categories to objects form any model class.
+:code:`Category` can be applied as a `generic` model. You prbably want to be able to apply categories to objects form any model class.
 You can do it like this
 
 
@@ -55,7 +55,7 @@ You can do it like this
         # ...
 
 
-What did we do, we added we added a :code:`GenericForeignKey` fields on :code:`FlexCategory` using one :code:`ForeignKey` and one :code:`PositiveIntegerField`, then
+What did we do, we added a :code:`GenericForeignKey` fields on :code:`FlexCategory` using one :code:`ForeignKey` and one :code:`PositiveIntegerField`, then
 added a :code:`GenericRelation` on the models you want to categorize.
 
 
