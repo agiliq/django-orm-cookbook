@@ -1,4 +1,4 @@
-django==2.0.1
+django==2.0.12
 Pillow
 django-extensions==2.0.6
 dj-database-url==0.4.2
