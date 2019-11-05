@@ -3,7 +3,7 @@ How to add a model for a database view?
 
 A database view is a searchable object in a database that is defined by a query.  Though a view doesn’t store data, some refer to a views as “virtual tables,” you can query a view like you can a table.  A view can combine data from two or more table, using joins, and also just contain a subset of information.  This makes them convenient to abstract, or hide, complicated queries.
 
-In our SqliteStuio we can see 26 tables and no views.
+In our SqliteStudio we can see 26 tables and no views.
 
 .. image:: before_view.png
 
