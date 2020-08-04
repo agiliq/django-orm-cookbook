@@ -27,4 +27,4 @@ jobs:
         pip install -r heroes_and_monsters/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python heroes_and_monsters/manage.py test
