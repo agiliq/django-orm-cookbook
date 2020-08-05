@@ -1,8 +1,11 @@
+from datetime import date, datetime
 import unittest
 
 from django.db.models import Q, Subquery, Avg, Max, Min, Sum, Count
 from django.db.utils import OperationalError
 from django.test import TestCase
+from django.utils.dateparse import parse_date
+
 from .models import User, Event, EventVillain, UserParent, Article
 
 
@@ -333,3 +336,25 @@ class TestGroupQuery(GlobalUserTestData, TestCase):
     def test_sum(self):
         sum_id = User.objects.all().aggregate(Sum("id"))
         self.assertEqual(sum_id["id__sum"], 55)
+
+
+class TestDateTimeParse(GlobalUserTestData, TestCase):
+    def test_str_date_input(self):
+        user = User.objects.get(id=1)
+        date_str = "2020-08-05"
+        temp_date = parse_date(date_str)
+        a1 = Article(
+            headline="String converted to date", pub_date=temp_date, reporter=user
+        )
+        a1.save()
+        self.assertEqual(a1.id, 1)
+        self.assertEqual(a1.pub_date, date(year=2020, month=8, day=5))
+
+        temp_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        a2 = Article(
+            headline="String converted to date way 2", pub_date=temp_date, reporter=user
+        )
+        a2.save()
+        a2.pub_date
+        self.assertEqual(a2.id, 2)
+        self.assertEqual(a2.pub_date, date(year=2020, month=8, day=5))
