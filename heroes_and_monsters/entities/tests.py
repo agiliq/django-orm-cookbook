@@ -7,15 +7,23 @@ from events.tests import GlobalUserTestData
 from .models import Hero, Category, Origin
 
 
-class TestSubQuery(TestCase):
+class GlobalCategoryTestData:
     def setUp(self):
+        self.bulk_create_category()
+
+    def bulk_create_category(self):
         Category.objects.bulk_create(
             [
-                Category(name="category_1", hero_count=12, villain_count=15),
-                Category(name="category_2", hero_count=25, villain_count=5),
-                Category(name="category_3", hero_count=17, villain_count=13),
+                Category(name="God", hero_count=0, villain_count=0),
+                Category(name="Demi God", hero_count=0, villain_count=0),
+                Category(name="Mortal", hero_count=0, villain_count=0),
             ]
         )
+
+
+class TestSubQuery(GlobalCategoryTestData, TestCase):
+    def setUp(self):
+        super().setUp()
         Origin.objects.create(name="origin_1")
         Hero.objects.bulk_create(
             [
@@ -58,7 +66,7 @@ class TestSubQuery(TestCase):
         cateogories = Category.objects.all().annotate(
             most_benevolent_hero=Subquery(hero_qs.values("name")[:1])
         )
-        output_category = ["category_1", "category_2", "category_3"]
+        output_category = ["God", "Demi God", "Mortal"]
         self.assertEqual(
             list(cateogories.values_list("name", flat=True)), output_category
         )
@@ -98,16 +106,29 @@ class TestFQuery(TestCase):
         self.assertEqual(list(users.values_list("first_name", flat=True)), output_user)
 
 
-class TestBulkCreate(TestCase):
+class TestBulkCreate(GlobalCategoryTestData, TestCase):
+    def setUp(self):
+        pass
+
     def test_bulk_create(self):
         category_count = Category.objects.all().count()
         self.assertEqual(category_count, 0)
-        Category.objects.bulk_create(
-            [
-                Category(name="God", hero_count=0, villain_count=0),
-                Category(name="Demi God", hero_count=0, villain_count=0),
-                Category(name="Mortal", hero_count=0, villain_count=0),
-            ]
-        )
+
+        self.bulk_create_category()
+
         category_count = Category.objects.all().count()
         self.assertEqual(category_count, 3)
+
+
+class TestObjectCopy(GlobalCategoryTestData, TestCase):
+    def test_object_copy(self):
+        category_count = Category.objects.count()
+        self.assertEqual(category_count, 3)
+
+        category = Category.objects.last()
+        category.pk = None
+        category.save()
+
+        category_count = Category.objects.count()
+        self.assertEqual(category_count, 4)
+        self.assertEqual(Category.objects.last().name, "Mortal")
