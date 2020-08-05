@@ -22,7 +22,7 @@ class GlobalCategoryTestData:
         )
 
 
-class TestSubQuery(GlobalCategoryTestData, TestCase):
+class GlobalHeroTestData(GlobalCategoryTestData):
     def setUp(self):
         super().setUp()
         Origin.objects.create(name="origin_1")
@@ -59,6 +59,9 @@ class TestSubQuery(GlobalCategoryTestData, TestCase):
             ]
         )
 
+
+class TestSubQuery(GlobalHeroTestData, TestCase):
+    
     def test_sub_query(self):
         hero_qs = Hero.objects.filter(category=OuterRef("pk")).order_by(
             "-benevolence_factor"
@@ -144,4 +147,20 @@ class TestSingleObjectCreate(TestCase):
             Origin.objects.create(name="origin 2")
         except IntegrityError:
             pass
-        self.assertEqual(Origin.objects.count(), 1)
+
+
+class TestDenormalizedColumnUpdate(GlobalHeroTestData, TestCase):
+    def test_hero_count(self):
+        category = Category.objects.get(id=2)
+
+        hero_count = category.hero_count
+        Hero.objects.create(
+                    name="Iron Man",
+                    description="Iron Man",
+                    benevolence_factor=90,
+                    category_id=2,
+                    origin_id=1,
+                )
+        category = Category.objects.get(id=2)
+
+        self.assertEqual(category.hero_count, hero_count+1)

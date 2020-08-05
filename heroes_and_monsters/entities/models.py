@@ -116,6 +116,11 @@ class Hero(Entity):
         "self", related_name="+", null=True, blank=True, on_delete=models.SET_NULL
     )
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            Category.objects.filter(pk=self.category_id).update(hero_count=F('hero_count')+1)
+        super().save(*args, **kwargs)
+
 
 class HeroProxy(Hero):
 
@@ -134,9 +139,10 @@ class Villain(Entity):
     is_unique = models.BooleanField(default=True)
     count = models.PositiveSmallIntegerField(default=1)
 
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     Category.objects.filter(pk=self.category_pk).update(villain_count=F(villain_count)+1)
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            Category.objects.filter(pk=self.category_id).update(villain_count=F('villain_count')+1)
+        super().save(*args, **kwargs)
 
 
 class HeroAcquaintance(models.Model):
@@ -156,18 +162,18 @@ class AllEntity(models.Model):
         db_table = "entities_entity"
 
 
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
+# from django.db.models.signals import pre_save
+# from django.dispatch import receiver
 
-@receiver(pre_save, sender=Hero, dispatch_uid="update_hero_count")
-def update_hero_count(sender, **kwargs):
-    hero = kwargs['instance']
-    if hero.pk:
-        Category.objects.filter(pk=hero.category_id).update(hero_count=F('hero_count')+1)
+# @receiver(pre_save, sender=Hero, dispatch_uid="update_hero_count")
+# def update_hero_count(sender, **kwargs):
+#     hero = kwargs['instance']
+#     if hero.pk:
+#         Category.objects.filter(pk=hero.category_id).update(hero_count=F('hero_count')+1)
 
-@receiver(pre_save, sender=Villain, dispatch_uid="update_villain_count")
-def update_villain_count(sender, **kwargs):
-    villain = kwargs['instance']
-    if villain.pk:
-        Category.objects.filter(pk=villain.category_id).update(villain_count=F('villain_count')+1)
+# @receiver(pre_save, sender=Villain, dispatch_uid="update_villain_count")
+# def update_villain_count(sender, **kwargs):
+#     villain = kwargs['instance']
+#     if villain.pk:
+#         Category.objects.filter(pk=villain.category_id).update(villain_count=F('villain_count')+1)
 
