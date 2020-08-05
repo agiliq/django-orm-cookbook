@@ -361,7 +361,7 @@ class TestDateTimeParse(GlobalUserTestData, TestCase):
         self.assertEqual(a2.pub_date, date(year=2020, month=8, day=5))
 
 
-class TestCaseInsensitiveOrderBy(GlobalUserTestData, TestCase):
+class TestOrderBy(GlobalUserTestData, TestCase):
     def test_plan_orderby_for_case_insensitive(self):
         users = User.objects.all().order_by(Lower('username')).values_list('username', flat=True)
         output_user = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'rishab', 'Ritesh', 'sharukh', 'sohan', 'yash']
@@ -373,3 +373,8 @@ class TestCaseInsensitiveOrderBy(GlobalUserTestData, TestCase):
         ).order_by('uname').values_list('username', flat=True)
         output_user = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'rishab', 'Ritesh', 'sharukh', 'sohan', 'yash']
         self.assertEqual(list(users), output_user)
+
+    def test_orderby_on_two_fields(self):
+        users = User.objects.all().order_by("is_active", "-last_login", "first_name").values_list("first_name", flat=True)
+        output_order = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'Rishabh', 'Ritesh', 'Sharukh', 'Sohan', 'Yash']
+        self.assertEqual(list(users), output_order)
