@@ -2,6 +2,7 @@ from datetime import date, datetime
 import unittest
 
 from django.db.models import Q, Subquery, Avg, Max, Min, Sum, Count
+from django.db.models.functions import Lower
 from django.db.utils import OperationalError
 from django.test import TestCase
 from django.utils.dateparse import parse_date
@@ -358,3 +359,17 @@ class TestDateTimeParse(GlobalUserTestData, TestCase):
         a2.pub_date
         self.assertEqual(a2.id, 2)
         self.assertEqual(a2.pub_date, date(year=2020, month=8, day=5))
+
+
+class TestCaseInsensitiveOrderBy(GlobalUserTestData, TestCase):
+    def test_plan_orderby_for_case_insensitive(self):
+        users = User.objects.all().order_by(Lower('username')).values_list('username', flat=True)
+        output_user = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'rishab', 'Ritesh', 'sharukh', 'sohan', 'yash']
+        self.assertEqual(list(users), output_user)
+
+    def test_annotate_orderby_for_case_insensitive(self):
+        users = User.objects.annotate(
+            uname=Lower('username')
+        ).order_by('uname').values_list('username', flat=True)
+        output_user = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'rishab', 'Ritesh', 'sharukh', 'sohan', 'yash']
+        self.assertEqual(list(users), output_user)
