@@ -65,10 +65,19 @@ class TestSubQuery(TestCase):
 
 
 class TestFQuery(TestCase):
-
     def setUp(self):
-        User.objects.create_user(email="shabda@example.com", username="shabda", first_name="Shabda", last_name="Raaj")
-        User.objects.create_user(email="guido@example.com", username="Guido", first_name="Guido", last_name="Guido")
+        User.objects.create_user(
+            email="shabda@example.com",
+            username="shabda",
+            first_name="Shabda",
+            last_name="Raaj",
+        )
+        User.objects.create_user(
+            email="guido@example.com",
+            username="Guido",
+            first_name="Guido",
+            last_name="Guido",
+        )
 
     def test_simple_f_expression(self):
         users = User.objects.filter(last_name=F("first_name"))
@@ -76,8 +85,14 @@ class TestFQuery(TestCase):
         self.assertEqual(list(users.values_list("first_name", flat=True)), output_user)
 
     def test_annotate_f_expression_with_substr(self):
-        User.objects.create_user(email="guido@example.com", username="Tim", first_name="Tim", last_name="Teters")
-        users = User.objects.annotate(first=Substr("first_name", 1, 1), last=Substr("last_name", 1, 1)).filter(first=F("last"))
+        User.objects.create_user(
+            email="guido@example.com",
+            username="Tim",
+            first_name="Tim",
+            last_name="Teters",
+        )
+        users = User.objects.annotate(
+            first=Substr("first_name", 1, 1), last=Substr("last_name", 1, 1)
+        ).filter(first=F("last"))
         output_user = ["Guido", "Tim"]
         self.assertEqual(list(users.values_list("first_name", flat=True)), output_user)
-

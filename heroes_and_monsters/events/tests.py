@@ -1,6 +1,6 @@
 import unittest
 
-from django.db.models import Q, Subquery, Count
+from django.db.models import Q, Subquery, Avg, Max, Min, Sum, Count
 from django.db.utils import OperationalError
 from django.test import TestCase
 from .models import User, Event, EventVillain, UserParent, Article
@@ -259,16 +259,15 @@ class TestSubQuery(GlobalUserTestData, TestCase):
 
 
 class TestJoinOperation(TestCase):
-
     def test_join_query(self):
-        a1 = Article.objects.select_related('reporter')
+        a1 = Article.objects.select_related("reporter")
         output_query = 'SELECT "events_article"."id", "events_article"."headline", "events_article"."pub_date", "events_article"."reporter_id", "events_article"."slug", "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "events_article" INNER JOIN "auth_user" ON ("events_article"."reporter_id" = "auth_user"."id") ORDER BY "events_article"."headline" ASC'
         self.assertEqual(str(a1.query), output_query)
 
 
 class TestSecondLargestRecord(GlobalUserTestData, TestCase):
     def test_second_largest_record(self):
-        user = User.objects.order_by('-last_login')[1]
+        user = User.objects.order_by("-last_login")[1]
         self.assertEqual(user.username, "John")
 
 
@@ -283,32 +282,54 @@ class TestDuplicateRecord(GlobalUserTestData, TestCase):
         )
 
     def test_duplicate(self):
-        duplicates = User.objects.values(
-            'first_name'
-            ).annotate(name_count=Count('first_name')).filter(name_count__gt=1)
+        duplicates = (
+            User.objects.values("first_name")
+            .annotate(name_count=Count("first_name"))
+            .filter(name_count__gt=1)
+        )
         self.assertEqual(list(duplicates), [{"first_name": "Yash", "name_count": 2}])
 
-        records = User.objects.filter(first_name__in=[item['first_name'] for item in duplicates])
+        records = User.objects.filter(
+            first_name__in=[item["first_name"] for item in duplicates]
+        )
         self.assertEqual([item.id for item in records], [1, 11])
 
 
 class TestDistinctRecord(GlobalUserTestData, TestCase):
     def test_distinct_user(self):
-        distinct = User.objects.values(
-            'first_name'
-        ).annotate(
-            name_count=Count('first_name')
-        ).filter(name_count=1)
+        distinct = (
+            User.objects.values("first_name")
+            .annotate(name_count=Count("first_name"))
+            .filter(name_count=1)
+        )
         output_user = [
-            {'first_name': 'Billy', 'name_count': 1},
-            {'first_name': 'John', 'name_count': 1},
-            {'first_name': 'Radha', 'name_count': 1},
-            {'first_name': 'Raghu', 'name_count': 1},
-            {'first_name': 'Ricky', 'name_count': 1},
-            {'first_name': 'Rishabh', 'name_count': 1},
-            {'first_name': 'Ritesh', 'name_count': 1},
-            {'first_name': 'Sharukh', 'name_count': 1},
-            {'first_name': 'Sohan', 'name_count': 1},
-            {'first_name': 'Yash', 'name_count': 1}
+            {"first_name": "Billy", "name_count": 1},
+            {"first_name": "John", "name_count": 1},
+            {"first_name": "Radha", "name_count": 1},
+            {"first_name": "Raghu", "name_count": 1},
+            {"first_name": "Ricky", "name_count": 1},
+            {"first_name": "Rishabh", "name_count": 1},
+            {"first_name": "Ritesh", "name_count": 1},
+            {"first_name": "Sharukh", "name_count": 1},
+            {"first_name": "Sohan", "name_count": 1},
+            {"first_name": "Yash", "name_count": 1},
         ]
         self.assertEqual(list(distinct), output_user)
+
+
+class TestGroupQuery(GlobalUserTestData, TestCase):
+    def test_avg(self):
+        avg_id = User.objects.all().aggregate(Avg("id"))
+        self.assertEqual(avg_id["id__avg"], 5.5)
+
+    def test_max(self):
+        max_id = User.objects.all().aggregate(Max("id"))
+        self.assertEqual(max_id["id__max"], 10)
+
+    def test_min(self):
+        min_id = User.objects.all().aggregate(Min("id"))
+        self.assertEqual(min_id["id__min"], 1)
+
+    def test_sum(self):
+        sum_id = User.objects.all().aggregate(Sum("id"))
+        self.assertEqual(sum_id["id__sum"], 55)
