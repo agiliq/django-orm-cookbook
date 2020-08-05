@@ -96,3 +96,18 @@ class TestFQuery(TestCase):
         ).filter(first=F("last"))
         output_user = ["Guido", "Tim"]
         self.assertEqual(list(users.values_list("first_name", flat=True)), output_user)
+
+
+class TestBulkCreate(TestCase):
+    def test_bulk_create(self):
+        category_count = Category.objects.all().count()
+        self.assertEqual(category_count, 0)
+        Category.objects.bulk_create(
+            [
+                Category(name="God", hero_count=0, villain_count=0),
+                Category(name="Demi God", hero_count=0, villain_count=0),
+                Category(name="Mortal", hero_count=0, villain_count=0),
+            ]
+        )
+        category_count = Category.objects.all().count()
+        self.assertEqual(category_count, 3)
