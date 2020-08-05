@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import OuterRef, Subquery, F
 from django.db.models.functions import Substr
+from django.db.utils import IntegrityError
 from django.test import TestCase
 
 from events.tests import GlobalUserTestData
@@ -132,3 +133,15 @@ class TestObjectCopy(GlobalCategoryTestData, TestCase):
         category_count = Category.objects.count()
         self.assertEqual(category_count, 4)
         self.assertEqual(Category.objects.last().name, "Mortal")
+
+
+class TestSingleObjectCreate(TestCase):
+    def test_single_object_create(self):
+        Origin.objects.create(name="origin 1")
+        self.assertEqual(Origin.objects.count(), 1)
+
+        try:
+            Origin.objects.create(name="origin 2")
+        except IntegrityError:
+            pass
+        self.assertEqual(Origin.objects.count(), 1)
