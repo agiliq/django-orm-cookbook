@@ -1,9 +1,9 @@
 import unittest
 
-from django.db.models import Q, Subquery
+from django.db.models import Q, Subquery, Count
 from django.db.utils import OperationalError
 from django.test import TestCase
-from .models import User, Event, EventVillain, UserParent
+from .models import User, Event, EventVillain, UserParent, Article
 
 
 class GlobalUserTestData:
@@ -256,3 +256,59 @@ class TestSubQuery(GlobalUserTestData, TestCase):
         queryset = UserParent.objects.filter(user_id__in=Subquery(users.values("id")))
 
         self.assertEqual(list(queryset.values_list("user_id", flat=True)), [5, 8])
+
+
+class TestJoinOperation(TestCase):
+
+    def test_join_query(self):
+        a1 = Article.objects.select_related('reporter')
+        output_query = 'SELECT "events_article"."id", "events_article"."headline", "events_article"."pub_date", "events_article"."reporter_id", "events_article"."slug", "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "events_article" INNER JOIN "auth_user" ON ("events_article"."reporter_id" = "auth_user"."id") ORDER BY "events_article"."headline" ASC'
+        self.assertEqual(str(a1.query), output_query)
+
+
+class TestSecondLargestRecord(GlobalUserTestData, TestCase):
+    def test_second_largest_record(self):
+        user = User.objects.order_by('-last_login')[1]
+        self.assertEqual(user.username, "John")
+
+
+class TestDuplicateRecord(GlobalUserTestData, TestCase):
+    def setUp(self):
+        super().setUp()
+        User.objects.create_user(
+            username="yash2",
+            first_name="Yash",
+            last_name="Rastogi2",
+            email="yash@example.com",
+        )
+
+    def test_duplicate(self):
+        duplicates = User.objects.values(
+            'first_name'
+            ).annotate(name_count=Count('first_name')).filter(name_count__gt=1)
+        self.assertEqual(list(duplicates), [{"first_name": "Yash", "name_count": 2}])
+
+        records = User.objects.filter(first_name__in=[item['first_name'] for item in duplicates])
+        self.assertEqual([item.id for item in records], [1, 11])
+
+
+class TestDistinctRecord(GlobalUserTestData, TestCase):
+    def test_distinct_user(self):
+        distinct = User.objects.values(
+            'first_name'
+        ).annotate(
+            name_count=Count('first_name')
+        ).filter(name_count=1)
+        output_user = [
+            {'first_name': 'Billy', 'name_count': 1},
+            {'first_name': 'John', 'name_count': 1},
+            {'first_name': 'Radha', 'name_count': 1},
+            {'first_name': 'Raghu', 'name_count': 1},
+            {'first_name': 'Ricky', 'name_count': 1},
+            {'first_name': 'Rishabh', 'name_count': 1},
+            {'first_name': 'Ritesh', 'name_count': 1},
+            {'first_name': 'Sharukh', 'name_count': 1},
+            {'first_name': 'Sohan', 'name_count': 1},
+            {'first_name': 'Yash', 'name_count': 1}
+        ]
+        self.assertEqual(list(distinct), output_user)
