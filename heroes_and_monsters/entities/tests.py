@@ -163,3 +163,15 @@ class TestDenormalizedColumnUpdate(GlobalHeroTestData, TestCase):
         category = Category.objects.get(id=2)
 
         self.assertEqual(category.hero_count, hero_count + 1)
+
+
+class TestTruncateQuery(GlobalCategoryTestData, TestCase):
+    def test_truncate_data(self):
+        self.assertEqual(Category.objects.all().count(), 3)
+        Category.objects.all().delete()
+        self.assertEqual(Category.objects.all().count(), 0)
+
+    def test_truncate_data_using_cursor(self):
+        self.assertEqual(Category.objects.all().count(), 3)
+        Category.truncate()
+        self.assertEqual(Category.objects.all().count(), 0)

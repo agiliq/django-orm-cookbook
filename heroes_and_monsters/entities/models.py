@@ -17,7 +17,7 @@ class Category(models.Model):
     @classmethod
     def truncate(cls):
         with connection.cursor() as cursor:
-            cursor.execute('TRUNCATE TABLE "{0}" CASCADE'.format(cls._meta.db_table))
+            cursor.execute('DELETE FROM "{0}"'.format(cls._meta.db_table))
 
     def __str__(self):
         return self.name
