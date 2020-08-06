@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db.models import OuterRef, Subquery, F
+from django.db.models import OuterRef, Subquery, F, Count
 from django.db.models.functions import Substr
 from django.db.utils import IntegrityError
 from django.test import TestCase
@@ -185,3 +185,13 @@ class TestOrderBy(GlobalHeroTestData, TestCase):
         output_hereos = ['Poseidon', 'Xeus', 'ZeuX', 'Zeus']
 
         self.assertEqual(list(hereos), output_hereos)
+
+    def test_orderby_on_annotate(self):
+        categories = Category.objects.annotate(
+            hero_count_annotate=Count("hero")
+        ).order_by(
+            "-hero_count_annotate"
+        ).values_list("name", flat=True)
+        output_category = ['Demi God', 'God', 'Mortal']
+
+        self.assertEqual(list(categories), output_category)
