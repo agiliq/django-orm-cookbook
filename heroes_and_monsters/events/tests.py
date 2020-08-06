@@ -7,7 +7,7 @@ from django.db.utils import OperationalError
 from django.test import TestCase
 from django.utils.dateparse import parse_date
 
-from .models import User, Event, EventVillain, UserParent, Article
+from .models import User, Event, EventVillain, UserParent, Article, UserParent
 
 
 class GlobalUserTestData:
@@ -378,3 +378,15 @@ class TestOrderBy(GlobalUserTestData, TestCase):
         users = User.objects.all().order_by("is_active", "-last_login", "first_name").values_list("first_name", flat=True)
         output_order = ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'Rishabh', 'Ritesh', 'Sharukh', 'Sohan', 'Yash']
         self.assertEqual(list(users), output_order)
+
+
+class TestModelRelationShip(GlobalUserTestData, TestCase):
+    def test_one_to_one_relationship(self):
+        u1 = User.objects.get(first_name='Ritesh', last_name='Deshmukh')
+        u2 = User.objects.get(first_name='Sohan', last_name='Upadhyay')
+        p1 = UserParent(user=u1, father_name='Vilasrao Deshmukh', mother_name='Vaishali Deshmukh')
+        p1.save()
+        self.assertEqual(p1.user.first_name, 'Ritesh')
+        p2 = UserParent(user=u2, father_name='Mr R S Upadhyay', mother_name='Mrs S K Upadhyay')
+        p2.save()
+        self.assertEqual(p2.user.last_name, 'Upadhyay')
