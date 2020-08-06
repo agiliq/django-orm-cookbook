@@ -175,3 +175,13 @@ class TestTruncateQuery(GlobalCategoryTestData, TestCase):
         self.assertEqual(Category.objects.all().count(), 3)
         Category.truncate()
         self.assertEqual(Category.objects.all().count(), 0)
+
+
+class TestOrderBy(GlobalHeroTestData, TestCase):
+    def test_orderby_on_related_field(self):
+        hereos = Hero.objects.all().order_by(
+            'category__name', 'name'
+        ).values_list("name", flat=True)
+        output_hereos = ['Poseidon', 'Xeus', 'ZeuX', 'Zeus']
+
+        self.assertEqual(list(hereos), output_hereos)
