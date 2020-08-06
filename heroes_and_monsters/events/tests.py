@@ -390,3 +390,18 @@ class TestModelRelationShip(GlobalUserTestData, TestCase):
         p2 = UserParent(user=u2, father_name='Mr R S Upadhyay', mother_name='Mrs S K Upadhyay')
         p2.save()
         self.assertEqual(p2.user.last_name, 'Upadhyay')
+
+    def test_one_to_many_relationship(self):
+        u1 = User(username='johny1', first_name='Johny', last_name='Smith', email='johny@example.com')
+        u1.save()
+        u2 = User(username='alien', first_name='Alien', last_name='Mars', email='alien@example.com')
+        u2.save()
+        from datetime import date
+        a1 = Article(headline="This is a test", pub_date=date(2018, 3, 6), reporter=u1)
+        a1.save()
+        self.assertEqual(a1.reporter.id, 11)
+        self.assertEqual(a1.reporter.username, "johny1")
+
+        Article.objects.create(headline="This is a test", pub_date=date(2018, 3, 7), reporter=u1)
+        articles = Article.objects.filter(reporter=u1)
+        self.assertEqual(list(articles.values_list("headline", flat=True)), ["This is a test", "This is a test"])
