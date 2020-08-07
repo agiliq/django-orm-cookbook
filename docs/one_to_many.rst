@@ -30,7 +30,7 @@ To define a many-to-one relationship, use `ForeignKey`.::
 If you try to assign an object before saving it you will encounter a ValueError ::
 
     >>> u3 = User(username='someuser', first_name='Some', last_name='User', email='some@example.com')
-    >>> Article.objects.create(headline="This is a test", pub_date=date(2018, 3, 7), reporter=u1)
+    >>> Article.objects.create(headline="This is a test", pub_date=date(2018, 3, 7), reporter=u3)
     Traceback (most recent call last):
     ...
     ValueError: save() prohibited to prevent data loss due to unsaved related object 'reporter'.
