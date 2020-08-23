@@ -10,7 +10,7 @@ Whenever we try to do :code:`order_by` with some string value, the ordering happ
     >>> User.objects.all().order_by('username').values_list('username', flat=True)
     <QuerySet ['Billy', 'John', 'Radha', 'Raghu', 'Ricky', 'Ritesh', 'johny', 'johny1', 'paul', 'rishab', 'sharukh', 'sohan', 'yash']>
 
-If we want to order queryset in case insensitive manner, we can do like this . ::
+If we want to order queryset in case insensitive manner, we can do like this.
 
 .. code-block:: ipython
 
