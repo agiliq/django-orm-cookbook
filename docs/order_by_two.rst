@@ -3,7 +3,7 @@ How to order on two fields
 
 :code:`order_by` on querysets can take one or more attribute names, allowing you to order on two or more fields.
 
-..code-block:: ipython
+.. code-block:: ipython
 
     In [5]: from django.contrib.auth.models import User
 
