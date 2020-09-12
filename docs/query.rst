@@ -1,7 +1,7 @@
 How to find the query associated with a queryset?
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Sometime you want to know how a Django ORM makes our queries execute or what is the corresponding SQL of the code you are writing. This is very strightforward. Youn can get :code:`str` of any :code:`queryset.query` to get the sql.
+Sometimes, you want to know how a Django ORM makes our queries execute or what is the corresponding SQL of the code you are writing. This is very straightforward. You can get :code:`str` of any :code:`queryset.query` to get the SQL.
 
 You have a model called :code:`Event`. For getting all records, you will write something like
 :code:`Event.objects.all()`, then do :code:`str(queryset.query)`
