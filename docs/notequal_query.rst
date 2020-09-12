@@ -22,11 +22,7 @@ Our SQL query for the above condition will look something like ::
 
 .. image:: sqluser_notquery.png
 
-Method 1 using exclude
-
-.. code-block
-
-
+Method 1 using exclude ::
 
     >>> queryset = User.objects.exclude(id__lt=5)
     >>> queryset

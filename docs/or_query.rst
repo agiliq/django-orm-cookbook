@@ -5,9 +5,9 @@ How to do OR queries in Django ORM?
 
 If you are using :code:`django.contrib.auth`, you will have a table called :code:`auth_user`. It will have fields as :code:`username`, :code:`first_name`, :code:`last_name` and more.
 
-A common requirement is performing :code:`OR` filtering with two ore more conditions. Say you want find all users with firstname starting with 'R' and last_name starting with 'D'.
+A common requirement is performing :code:`OR` filtering with two or more conditions. Say you want to find all users with firstname starting with 'R' and last_name starting with 'D'.
 
-Django provides two options.
+Django provides two options:
 
 - :code:`queryset_1 | queryset_2`
 - :code:`filter(Q(<condition_1>)|Q(<condition_2>)`
