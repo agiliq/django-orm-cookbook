@@ -29,7 +29,7 @@
 
 .. code-block:: python
 
-    from django.contrib.contenttypes.fields import GenericForeignKey
+    from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
     from django.contrib.contenttypes.models import ContentType
     # ...
 
