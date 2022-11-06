@@ -76,7 +76,7 @@ Signals vs Overriding :code:`.save`
 ++++++++++++++++++++++++++++++++++++
 
 
-Since either of signals of :code:`.save` can be used for the save behviour, when should you use which one? I follow a simple rule.
+Since either of signals or overriding :code:`.save` can be used for the save behaviour, when should you use which one? I follow a simple rule.
 
 - If your fields depend on a model you control, override :code:`.save`
 - If your fields depend on a model from a 3rd party app, which you do no control, use signals.
